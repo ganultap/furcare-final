@@ -1,0 +1,646 @@
+<title>ADMIN</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/images/logo.png">
+ 
+        <nav class="navbar navbar-expand-xl navbar-light bg-light">
+          <a href='#/admin' class="navbar-brand" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+            <img alt="logo" height="25" src="assets/images/logo.png">
+        
+            <b>FURCARE SYSTEM</b></a>
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+       
+          <!-- Collection of nav links, forms, and other content for toggling -->
+          <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="margin-right: 50px;">
+            
+            <div class="navbar-nav ml-auto" style="margin-right: 40px;">
+              <a href='#/admin' class="nav-item nav-link"><i style="color:teal" class="fas fa-home"></i>&nbsp;Home</a>
+              <a href='#/reports' class="nav-item nav-link active"><i style="color: crimson;" class="fas fa-notes-medical"></i>&nbsp;Reports</a>
+              <div *ngIf="currentuser.usertype == 'admin'">
+                <a href='#/manage-users' class="nav-item nav-link"><i style="color: rgba(13, 107, 49, 0.904);" class="fas fa-users"></i>&nbsp;Manage Users</a>
+              </div>
+            </div>
+           
+        
+          </div>
+        
+            <a (click)="notifypop($event)" class="nav-item nav-link notifications" style="margin: auto; color: black;cursor:pointer"><i class="fa fa-bell-o fa-2x"></i><span class="badge">{{notifydata.length+ notifydata4.length}}</span></a>
+          
+            <button (click)="marklogout()" style="background: none;"> Logout</button>
+              <a style="margin: auto;"
+              
+              (click)="marklogout()"
+              class="nav-link dropdown-toggle user-action"></a>
+              <!-- (click)="acc_popover($event)" -->
+          
+          
+        </nav>
+
+
+        <ion-content>
+        <ion-card class="wrapper" style="margin-left: 200px; margin-right: 200px; margin-top: 50px; border-radius: 5px; border-width: 1px; background: white; min-height: 700px;">
+         
+      <div class="w3-center">
+        <div class="row p-4">
+          <div class="col"></div>
+          <div class="col">
+          <select class="form-control"  name="usertype" id= "service" [(ngModel)]="choice">
+            <option value="undefined" selected disabled>Search Filter</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <!-- <option value="monthly">Monthly</option> -->
+         
+            
+            
+          </select>
+          </div>
+
+            <div *ngIf="choice == 'daily'" style="display: inline;">
+              <!-- <label>&nbsp; Choose day &nbsp;</label> -->
+              <input class="form-control" type="date" [(ngModel)]="dailychoice">
+              </div>
+    
+              <div *ngIf="choice == 'weekly'" style="display: inline;">
+                <!-- <label>&nbsp; Choose any day of the week &nbsp;</label> -->
+                <input class="form-control" type="date" [(ngModel)]="weeklychoice">
+              </div>
+    
+              <div *ngIf="choice == 'monthly'" style="display: inline;">
+                <!-- <label>&nbsp; Choose month &nbsp;</label> -->
+                <input class="form-control" type="month" [(ngModel)]="monthlychoice">
+              </div>
+
+
+          <div *ngIf="choice">
+            <button class="btn btn-info" style="width: 50px; height: 40px" (click)="submit()"><i class="fas fa-check"></i></button>
+          </div>
+          <div class="col"></div>
+          
+        </div>
+
+        <div class="confine-switch">
+          <ion-segment [(ngModel)]="status">
+              <ion-segment-button class="sss" value="Clients">
+                  <ion-label>Clients  <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">{{sortClients.length}}</span></sup></ion-label>
+              </ion-segment-button>
+              <ion-segment-button class="sss" value="Patients">
+                  <ion-label>Patients  <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">{{sortPatients.length}}</span></sup></ion-label>
+              </ion-segment-button>
+              <ion-segment-button class="" value="Services">
+                <ion-label>Services  <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">{{sortService.length}}</span></sup></ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+      
+
+      <div [hidden]="status != 'Clients'">
+        <!-- <div class="results" *ngIf="sortClients.length != 0">found<b> {{sortClients.length}} </b>result(s)</div> -->
+        <div *ngIf="sortClients.length != 0" class="table-wrapper" >
+        
+           
+            <ion-searchbar class="searchbar" style="width: 400px; display: inline;" [(ngModel)]="filter3"></ion-searchbar>
+              <table class="table table-striped" id="myTable" >
+                <thead>
+                  <tr  style="text-align: center;">
+                    <th >Name</th>
+                    
+                    <th >Address</th>
+                    <th >Mobile number</th>
+                    <th>Email</th>
+                   
+                
+                    <th >Adder</th>
+                    <th >Date added</th>
+                   
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of sortClients | filter : filter3 | paginate : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count,
+                    id: 'client'
+                  };" >
+                    <td><b *ngIf="mobile">Name: </b><b>{{data.name}}</b></td>
+                    <td><b *ngIf="mobile">Address: </b>{{data.address}}</td>
+                    <td><b *ngIf="mobile">Mobile number: </b>{{data.mobile_number}}</td>
+                    <td><b *ngIf="mobile">Email: </b>{{data.email}}</td>
+                    <td><b *ngIf="mobile">Adder: </b>{{data.adder}}</td>
+                    <td><b *ngIf="mobile">Date added: </b>{{data.date_added | date}}</td>
+                    
+              
+                    
+                    
+                    
+                  </tr>
+                
+                 
+                  
+                  
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-center">
+                <pagination-controls 
+                  responsive="true" 
+                  previousLabel="Prev" 
+                  nextLabel="Next" 
+                  (pageChange)="onTableDataChange($event)"
+                  id="client"
+                  maxSize="5">
+                </pagination-controls>
+              </div>
+              
+              </div>
+         
+
+      </div>
+      <div [hidden]="status != 'Patients'">
+        <!-- <div class="results" *ngIf="sortPatients.length != 0">found<b> {{sortPatients.length}} </b>result(s)</div> -->
+        <div *ngIf="sortPatients.length != 0" class="table-wrapper" >
+        
+           
+          <ion-searchbar class="searchbar" style="width: 400px; display: inline;" [(ngModel)]="filter4"></ion-searchbar>
+        
+          <table class="table table-striped" id="myTable" >
+              <thead>
+                <tr  style="text-align: center;">
+                  <th >Name</th>
+                  
+                  <th >Species</th>
+                  <th >Birth</th>
+                  <th>Color</th>
+                 
+              
+                  <th >Breed</th>
+                  <th >Gender</th>
+                  <th >Microchip</th>
+                  <th >Dateofimplant</th>
+                  <th >Owner</th>
+                 
+                
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of sortPatients | filter : filter4 | paginate : {
+                  itemsPerPage: tableSize1,
+                  currentPage: page1,
+                  totalItems: count1,
+                  id: 'patient'
+                };" >
+                  <td><b>{{data.name}}</b></td>
+                  <td>{{data.species}}</td>
+                  <td *ngIf="data.birth != 'undefined'">{{data.birth | date}}</td>
+                  <td *ngIf="data.birth == 'undefined'">{{data.birth}}</td>
+                  <td>{{data.color}}</td>
+                  <td>{{data.breed}}</td>
+                  <td>{{data.gender}}</td>
+                  <td>{{data.microchip}}</td>
+                  <td>{{data.dateofimplant}}</td>
+                  <td>{{data.name1}}</td>
+                  
+                  
+            
+                  
+                  
+                  
+                </tr>
+              
+               
+                
+                
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-center">
+              <pagination-controls 
+                responsive="true" 
+                previousLabel="Prev" 
+                nextLabel="Next" 
+                (pageChange)="onTableDataChange1($event)"
+                id="patient"
+                maxSize="5">
+              </pagination-controls>
+            </div>
+            
+            </div>
+
+      </div>
+      <div [hidden]="status != 'Services'">
+        <!-- <div class="results" *ngIf="sortService.length != 0">found<b> {{sortService.length}} </b>result(s)</div> -->
+    
+        <div *ngIf="sortService.length != 0" class="table-wrapper" >
+        
+         
+          <ion-searchbar class="searchbar" style="width: 400px; display: inline;" [(ngModel)]="filter5"></ion-searchbar>
+            <table class="table table-striped" id="myTable" >
+              <thead>
+                <tr  style="text-align: center;">
+                  <th >Patient</th>
+                  <th >Service Type</th>
+                  
+                  <th >Weight</th>
+                  <th style="width: 300px;"></th>
+                  <th >Against</th>
+                  <th>Veterinarian</th>
+                 
+              
+                  
+                  <th >Client</th>
+                  <th >Session</th>
+                  <th >Date of Service</th>
+                  
+                 
+                
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of sortService  | filter: filter5 | paginate : {
+                  itemsPerPage: tableSize2,
+                  currentPage: page2,
+                  totalItems: count2,
+                  id: 'service'
+                } | filter : filter">
+            
+                  <td><b>{{data.patientname}}</b></td>
+                  <td>{{data.service_type}}</td>
+                  <td>{{data.weight}}</td>
+                  <td ><button (click)="viewphoto(data.photolink)" style="background: none;"><img *ngIf="data.photo != ''" style="width: 150px; height: 80px;" [src]='data.photolink' alt="Italian Trulli"></button></td>
+                  <td>{{data.against}}</td>
+                  <td>{{data.veterinarian}}</td>
+                  
+                  <td>{{data.clientname}}</td>
+                  <td>{{data.session}}</td>
+                  <td>{{data.service_date | date}}</td>
+                  
+                  
+                  
+            
+                  
+                  
+                  
+                </tr>
+              
+               
+                
+                
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-center">
+              <pagination-controls 
+                responsive="true" 
+                previousLabel="Prev" 
+                nextLabel="Next" 
+                (pageChange)="onTableDataChange2($event)"
+                id="service"
+                maxSize="5">
+              </pagination-controls>
+            </div>
+            
+            </div>
+
+      </div>
+
+
+
+      </div>
+  </ion-card>
+<ion-card class="wrapper" style="border: solid rgb(205, 204, 204); margin-left: 200px; margin-right: 200px; margin-top: 50px; border-radius: 5px; border-width: 1px; background: white; min-height: 600px;">
+
+<div class="w3-center mt-4">
+  <label style="display: block; font-size: 25px;"><b>Confinement</b> </label>
+
+  <div class="confine-switch">
+    <ion-segment [(ngModel)]="status1">
+        <ion-segment-button class="sss" value="Confined">
+            <ion-label>Confined  <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">{{confined.length}}</span></sup> </ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="sss" value="Released">
+            <ion-label>Released  <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">{{released.length}}</span></sup> </ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="" value="All">
+          <ion-label>Total Confinement <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">{{allconfinement.length}}</span></sup> </ion-label>
+      </ion-segment-button>
+    </ion-segment>
+</div>
+</div>
+
+
+<div [hidden]="status1 != 'Confined'">
+   <!-- <label style="display: block; margin-left: 10px;"><b>Items: </b>{{confined.length}}</label> -->
+  <ion-searchbar class="searchbar sb" [(ngModel)]="filter"></ion-searchbar>
+  <div *ngFor="let data of sortconfined | filter : filter | paginate : {
+    itemsPerPage: 1,
+    currentPage: page3,
+    totalItems: count3,
+    id: 'confined'
+  };">
+     
+ 
+    
+  <ion-card class="modal-body mb">
+    <label style="display: block;"><b>Date Added: </b>{{data.date_added | date: 'medium'}}</label>					
+   <div class="row top">
+     <div class="col columns">
+      <label style="display: block; margin-bottom: 20px"><b>Client Name: </b>{{data.clientname}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Pet's Name: </b>{{data.patientname}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Cellphone No.: </b>{{data.mobile_number}} </label> 
+      <label style="display: block; margin-bottom: 20px"><b>Address: </b>{{data.address}} </label>
+    
+    </div>
+    <div class="col columns">
+      <label style="display: block; margin-bottom: 20px"><b>Date: </b>{{data.date_added | date}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Breed: </b>{{data.breed}}</label>
+      <label style="display: block; margin-bottom: 20px"><b>DOB: </b>{{data.birth}} </label> 
+    </div>
+  
+  </div>
+
+    <div class="form-group">
+      <input type="button" class="btn btn-success" (click)="alertrelease(data)"  value="RELEASE" style="margin: 20px; float:right">
+      <input *ngIf="data.released == 0" type="button" class="btn btn-success" (click)="alertrelease1(data)"  value="RELEASE and RETAIN RELEASE DATE" style="margin: 20px; float:right;width: auto;">
+      <label><b>Procedure: <u>{{data.confinement_procedure}}</u></b></label>
+      
+    </div>
+    
+    <div class="form-group">
+      
+    
+      <label><b>Veterinarian: <u>{{data.veterinarian}}</u></b></label>
+    </div>
+   
+    <div class="form-group">
+     
+      <pre>
+                                              <!-- <b> CONSENT FOR TREATMENT</b>
+  I agree to have my pet treated and confined at FURCARE Veterinary Clinic subject to the following conditions:
+    1. Confined pets can be visited from 10:00 am to 6:00 pm Mondays to Saturdays and 10:00am to 4:00 pm on
+        Sundays.
+    2. I authorize the whole staff to perform all the necessary diagnostic tests.
+    3. I have been informed that the estimated cost of treatment is <b><u>{{data.estimated_cost}}</u></b> per day. I understand that the
+       estimated cost per day does not include surgery, laboratory test, x ray, pet food and other confinement
+       expenses apart from the usual supportive medications.
+    4. A deposit of <b><u>{{data.deposit}}</u></b> is required upon checking in and the subsequent deposits will be required daily to
+       cover for medications.
+    5. The clinic and its staff shall not be held liable for any accident or loss beyond the control during the confinement.
+    6. When the pet is ready for discharge, the owner will be notified and the account must be settled promptly. The
+       deposit will be dedecuted from the total billing and a 24 hour grace period shall be given to the owner to claim
+       their pet after being notified. Unclaimed animals shall be considered abandoned and maybe put up for
+       adoption. It is understood that this does not relieve the owner from the cost of treatment.
+    7. In case of death the owner will be immediately notifed and the account must be settled accordingly. The body
+       must be claimed within 24 hours after being notified. If the owner fails to claim the body within specific
+       time, the staff will dispose the cadaver and necessary fees will apply.
+    8. Cut-off time is 12:00 noon. Patients taken beyond this time shall incur additional charges. -->
+
+    <label><b><u>{{data.date_of_addmision | date: 'medium'}}</u></b></label>
+    Date/Time of admission
+
+    <label><b><u>{{data.date_of_release | date: 'medium'}}</u></b></label>
+    Date/Time of Release
+
+    <label *ngIf="data.signature != ''"><b>Signature over printed name </b></label> 
+    <button (click)="viewphoto(data.photolink)" style="background: none;"><img *ngIf="data.signature != ''" style="width: 150px; height: 80px;" [src]='data.photolink' alt="Italian Trulli"></button>
+
+
+      </pre>
+    </div>
+
+  
+  </ion-card>
+</div>
+<div class="d-flex justify-content-center">
+  <pagination-controls 
+    responsive="true" 
+    previousLabel="Prev" 
+    nextLabel="Next" 
+    (pageChange)="onTableDataChange3($event)"
+    id="confined"
+    maxSize="5">
+  </pagination-controls>
+</div>
+
+
+</div>
+
+<div [hidden]="status1 != 'Released'">
+  <!-- <label style="display: block; margin-left: 10px;"><b>Items: </b>{{released.length}}</label> -->
+  <ion-searchbar class="searchbar sb" [(ngModel)]="filter1"></ion-searchbar>
+  <div *ngFor="let data of sortreleased | filter : filter1 | paginate : {
+    itemsPerPage: 1,
+    currentPage: page4,
+    totalItems: count4,
+    id: 'released'
+  };">
+    
+ 
+  
+  <ion-card class="modal-body mb">
+    <label style="display: block;"><b>Date Added: </b>{{data.date_added | date: 'medium'}}</label>
+   <div class="row top">
+     <div class="col columns">
+      <label style="display: block; margin-bottom: 20px"><b>Client Name: </b>{{data.clientname}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Pet's Name: </b>{{data.patientname}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Cellphone No.: </b>{{data.mobile_number}} </label> 
+      <label style="display: block; margin-bottom: 20px"><b>Address: </b>{{data.address}} </label>
+    
+    </div>
+    <div class="col columns">
+      <label style="display: block; margin-bottom: 20px"><b>Date: </b>{{data.date_added | date}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Breed: </b>{{data.breed}}</label>
+      <label style="display: block; margin-bottom: 20px"><b>DOB: </b>{{data.birth}} </label> 
+    </div>
+    <label class="slanted" *ngIf="data.released== 1" style="display: block; margin-bottom: 20px; float: right;"><b>RELEASED</b></label>
+    </div>
+
+    <div class="form-group">
+      
+      <label><b>Procedure: <u>{{data.confinement_procedure}}</u></b></label>
+      
+    </div>
+    
+    <div class="form-group">
+      
+    
+      <label><b>Veterinarian: <u>{{data.veterinarian}}</u></b></label>
+    </div>
+   
+    <div class="form-group">
+     
+      <pre>
+                                              <!-- <b> CONSENT FOR TREATMENT</b>
+  I agree to have my pet treated and confined at FURCARE Veterinary Clinic subject to the following conditions:
+    1. Confined pets can be visited from 10:00 am to 6:00 pm Mondays to Saturdays and 10:00am to 4:00 pm on
+        Sundays.
+    2. I authorize the whole staff to perform all the necessary diagnostic tests.
+    3. I have been informed that the estimated cost of treatment is <b><u>{{data.estimated_cost}}</u></b> per day. I understand that the
+       estimated cost per day does not include surgery, laboratory test, x ray, pet food and other confinement
+       expenses apart from the usual supportive medications.
+    4. A deposit of <b><u>{{data.deposit}}</u></b> is required upon checking in and the subsequent deposits will be required daily to
+       cover for medications.
+    5. The clinic and its staff shall not be held liable for any accident or loss beyond the control during the confinement.
+    6. When the pet is ready for discharge, the owner will be notified and the account must be settled promptly. The
+       deposit will be dedecuted from the total billing and a 24 hour grace period shall be given to the owner to claim
+       their pet after being notified. Unclaimed animals shall be considered abandoned and maybe put up for
+       adoption. It is understood that this does not relieve the owner from the cost of treatment.
+    7. In case of death the owner will be immediately notifed and the account must be settled accordingly. The body
+       must be claimed within 24 hours after being notified. If the owner fails to claim the body within specific
+       time, the staff will dispose the cadaver and necessary fees will apply.
+    8. Cut-off time is 12:00 noon. Patients taken beyond this time shall incur additional charges. -->
+
+    <label><b><u>{{data.date_of_addmision | date: 'medium'}}</u></b></label>
+    Date/Time of admission
+
+    <label><b><u>{{data.date_of_release | date: 'medium'}}</u></b></label>
+    Date/Time of Release
+
+    <label *ngIf="data.signature != ''"><b>Signature over printed name </b></label> 
+    <button (click)="viewphoto(data.photolink)" style="background: none;"><img *ngIf="data.signature != ''" style="width: 150px; height: 80px;" [src]='data.photolink' alt="Italian Trulli"></button>
+
+
+
+      </pre>
+    </div>
+
+  
+  </ion-card>
+</div>
+<div class="d-flex justify-content-center">
+  <pagination-controls 
+    responsive="true" 
+    previousLabel="Prev" 
+    nextLabel="Next" 
+    (pageChange)="onTableDataChange4($event)"
+    id="released"
+    maxSize="5">
+  </pagination-controls>
+</div>
+
+
+</div>
+
+<div [hidden]="status1 != 'All'">
+  <!-- <label style="display: block; margin-left: 10px;"><b>Items: </b>{{allconfinement.length}}</label> -->
+
+  <ion-searchbar class="searchbar sb" [(ngModel)]="filter2"></ion-searchbar>
+  <div *ngFor="let data of sortconfinement | filter : filter2 | paginate : {
+    itemsPerPage: 1,
+    currentPage: page5,
+    totalItems: count5,
+    id: 'all'
+  };">
+    
+  <ion-card class="modal-body mb">
+    <label style="display: block;"><b>Date Added: </b>{{data.date_added | date: 'medium'}}</label>				
+   <div class="row top">
+     <div class="col columns">
+      <label style="display: block; margin-bottom: 20px"><b>Client Name: </b>{{data.clientname}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Pet's Name: </b>{{data.patientname}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Cellphone No.: </b>{{data.mobile_number}} </label> 
+      <label style="display: block; margin-bottom: 20px"><b>Address: </b>{{data.address}} </label>
+    
+    </div>
+    <div class="col columns">
+      <label style="display: block; margin-bottom: 20px"><b>Date: </b>{{data.date_added | date}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Breed: </b>{{data.breed}}</label>
+      <label style="display: block; margin-bottom: 20px"><b>DOB: </b>{{data.birth}} </label> 
+    </div>
+
+    <label class="slanted" *ngIf="data.released== 1" style="display: block; margin-bottom: 20px; float: right;"><b>RELEASED</b></label> 
+  
+    </div>
+
+    <div class="form-group">
+      
+      <label><b>Procedure: <u>{{data.confinement_procedure}}</u></b></label>
+      
+    </div>
+    
+    <div class="form-group">
+      
+    
+      <label><b>Veterinarian: <u>{{data.veterinarian}}</u></b></label>
+    </div>
+   
+    <div class="form-group">
+     
+      <pre>
+                                              <!-- <b> CONSENT FOR TREATMENT</b>
+  I agree to have my pet treated and confined at FURCARE Veterinary Clinic subject to the following conditions:
+    1. Confined pets can be visited from 10:00 am to 6:00 pm Mondays to Saturdays and 10:00am to 4:00 pm on
+        Sundays.
+    2. I authorize the whole staff to perform all the necessary diagnostic tests.
+    3. I have been informed that the estimated cost of treatment is <b><u>{{data.estimated_cost}}</u></b> per day. I understand that the
+       estimated cost per day does not include surgery, laboratory test, x ray, pet food and other confinement
+       expenses apart from the usual supportive medications.
+    4. A deposit of <b><u>{{data.deposit}}</u></b> is required upon checking in and the subsequent deposits will be required daily to
+       cover for medications.
+    5. The clinic and its staff shall not be held liable for any accident or loss beyond the control during the confinement.
+    6. When the pet is ready for discharge, the owner will be notified and the account must be settled promptly. The
+       deposit will be dedecuted from the total billing and a 24 hour grace period shall be given to the owner to claim
+       their pet after being notified. Unclaimed animals shall be considered abandoned and maybe put up for
+       adoption. It is understood that this does not relieve the owner from the cost of treatment.
+    7. In case of death the owner will be immediately notifed and the account must be settled accordingly. The body
+       must be claimed within 24 hours after being notified. If the owner fails to claim the body within specific
+       time, the staff will dispose the cadaver and necessary fees will apply.
+    8. Cut-off time is 12:00 noon. Patients taken beyond this time shall incur additional charges. -->
+
+    <label><b><u>{{data.date_of_addmision | date: 'medium'}}</u></b></label>
+    Date/Time of admission
+
+    <label><b><u>{{data.date_of_release | date: 'medium'}}</u></b></label>
+    Date/Time of Release
+
+
+    <label *ngIf="data.signature != ''"><b>Signature over printed name </b></label> 
+    <button (click)="viewphoto(data.photolink)" style="background: none;"><img *ngIf="data.signature != ''" style="width: 150px; height: 80px;" [src]='data.photolink' alt="Italian Trulli"></button>
+
+
+      </pre>
+    </div>
+
+  
+  </ion-card>
+</div>
+<div class="d-flex justify-content-center">
+  <pagination-controls 
+    responsive="true" 
+    previousLabel="Prev" 
+    nextLabel="Next" 
+    (pageChange)="onTableDataChange5($event)"
+    id="all"
+    maxSize="5">
+  </pagination-controls>
+</div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ion-card>
+        </ion-content>

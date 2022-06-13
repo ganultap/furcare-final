@@ -1,0 +1,68 @@
+
+ 
+    
+      <body>
+        <div class="modal-header">						
+          <h4 class="modal-title">Add Patient</h4>
+          <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">					
+          <div class="form-group">
+            <label style="display: block; margin-bottom: 20px;font-weight: bold;">Patient Information:</label>
+            <label>Name</label>
+            <input type="text" class="form-control" (input)="name = $event.target.value;" required>
+          </div>
+          <div class="form-group">
+            <label for="species" >Species</label>
+  
+            <select name="species"  id= "usertype" (input)="species = $event.target.value;" class="form-control">
+              <option value=""></option>
+              <option value="canine">Canine</option>
+              <option value="feline">Feline</option>
+              
+              
+            </select>
+          </div>
+          <div class="form-group">
+            
+            <label>Date of Birth</label>
+            <input  type="date" class="form-control" (input)="birth = $event.target.value;" required>
+          </div>
+          <div class="form-group">
+            <label>Color</label>
+            <input type="text" class="form-control" (input)="color = $event.target.value;" required>
+          </div>
+          <div class="form-group">
+            <label>Breed</label>
+            <input type="text" class="form-control"(input)="breed = $event.target.value;" required>
+          </div>
+          <div class="form-group">
+            <label for="gender" >Gender</label>
+  
+            <select name="gender"  id= "usertype" (input)="gender = $event.target.value;" class="form-control">
+              <option value=""></option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              
+              
+            </select>
+          </div>
+          
+          <label style="display: block; margin-bottom: 20px;font-weight: bold;">Identification:</label>
+          <div class="form-group">
+            <label>Microchip</label>
+            <input type="text" class="form-control"(input)="microchip = $event.target.value;" required>
+          </div>
+          <div class="form-group">
+            <label>Date of Implantation</label>
+            <input type="date" class="form-control"(input)="dateofimplant = $event.target.value;" required>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <input type="button" class="btn btn-default" (click)="dismissModal()"  value="Cancel">
+          <input type="submit" class="btn btn-success" (click)="add_client()" value="Add">
+        </div>
+      
+   
+      </body>

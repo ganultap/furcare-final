@@ -1,0 +1,153 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADMIN</title>
+
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
+  <a href='#/admin' class="navbar-brand" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+    <img alt="logo" height="25" src="assets/images/logo.png">
+
+    <b>FURCARE SYSTEM</b></a>
+
+
+
+  <div class="navbar-nav ml-auto">
+    <a href='#/admin' class="nav-item nav-link notifications" style="font-size: medium;"><i class="fas fa-arrow-left"></i>&nbsp;BACK</a>
+
+  </div>
+
+</nav>
+
+<ion-content>
+  <ion-card class="petdash scroll">
+
+
+    <div class="ion-margin-start">
+      <div class="row modal-header">
+        <div class="col">
+          <i style="color: teal;" class="fas fa-user-alt fa-2x"></i> &nbsp;
+          <label>{{currclient.name}} <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info">{{patients.length}}</span></sup></label>
+        </div>
+
+        <div class="col text-right">
+          
+          <button (click)="openadd()" class="btn btn-success"><i class="fas fa-plus" style="color: gold;"></i> &nbsp;
+            ADD PET</button>
+        </div>
+      </div> 
+      
+      
+      <!-- <label style="display: block; font-size: 20px;"><b>Pet total:</b> &nbsp;{{patients.length}}</label> -->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2"></ion-col>
+
+
+          <div style="margin-bottom: 10px;" class="w3-center">
+            <div class="search">
+              <ion-searchbar class="searchbar" #search debounce="500" (ionChange)="_ionChange($event)"></ion-searchbar>
+            </div>
+            <div class="modal-body pet-view">
+              <ion-list>
+                <ion-list *ngFor="let data of sortPatients">
+                  <ion-card class="patients">
+                    <div class="font"
+                      style="text-align: left !important; margin: 5px;border-bottom: solid black; border-width: 1px;border-color: #555;">
+
+                      <button class="patientname">
+                        <i *ngIf="data.species=='canine'" class="fas fa-dog" style="color: rgb(9, 201, 214);"></i>
+                        <i *ngIf="data.species=='feline'" class="fas fa-cat" style="color: orange;"></i>
+                        <i *ngIf="data.species=='others'" class="fas fa-feather" style="color: orangered;"></i>
+                        &nbsp;{{data.name}} &nbsp; <i class="fas fa-paw" style="color: crimson;"></i></button>
+
+
+                      <div class="micro text-right">
+                        
+                        <a class="edit-del" (click)="opendit(data)" style="cursor: pointer;">&nbsp; <i title="Edit pet" class="edit fas fa-pen-alt"></i></a>
+                        <a class="edit-del" (click)="markdeletepatient(data)" style="cursor: pointer;"> <i title="Delete pet" class="del fas fa-trash"></i></a>
+                        <label class="micro" style="text-align: left; margin: 5px;"><b>Microchip:</b>
+                          &nbsp;{{data.microchip}}</label>
+                        <label class="micro" style="text-align: right; margin: 5px;"><b>Date
+                            Implanted:</b>&nbsp;{{data.dateofimplant}}</label>
+                      </div>
+                    </div>
+                    <div class="petservices">
+                
+                      <div class="zxczxc1" style="float: left;">
+                        <label style="display: block;"><b>Species:</b> &nbsp;{{data.species}}</label>
+                        <label style="display: block;"><b>Breed</b>: &nbsp;{{data.breed}}</label>
+                        <label style="display: block;"><b>Color</b>: &nbsp;{{data.color}}</label>
+                        
+                      </div>
+
+
+
+                      <div class="zxczxc" style="float: right;">
+                        <label style="display: block;"><b>Birth:</b> &nbsp;{{data.birth}}</label>
+                        <label style="display: block;"><b>Gender</b>: &nbsp;{{data.gender}}</label>
+                        <label style="display: block;"><b>Date Added</b>:
+                          &nbsp;{{data.patient_date_added | date}}</label>
+                      </div>
+
+                      
+                    </div>
+
+                    <div class="services-center card-footer">
+                      <button
+                        (click)="treatment(data)" class="services btn btn-success">Treatment Sheet</button>
+                      <button  (click)="medhistory(data)"
+                        class="services btn btn-success">Medical History</button>
+                      <button class="services btn btn-success"
+                        (click)="servicepop($event, data)">Services</button>
+  
+                      <!-- <button style="border-radius: 4px; margin: auto;" (click)="labresults(data)"
+                        class="btn1 btn-success">Lab Results</button> -->
+  
+                      <button (click)="schedule(data.patient_id)"
+                        class="services btn btn-success">Add Schedule</button>
+
+                        
+  
+                      </div>
+                  </ion-card>
+                  
+                  
+
+
+
+                </ion-list>
+
+              </ion-list>
+            </div>
+          </div>
+
+          <ion-col size="4"></ion-col>
+          
+        </ion-row>
+
+
+
+
+        <!-- <div class="w3-center">
+          <div class="w3-container1" style="overflow-x:auto;">
+
+
+
+          </div>
+        </div> -->
+
+
+
+        
+      </ion-grid>
+
+
+
+    </div>
+
+
+
+  </ion-card>
+
+  
+
+</ion-content>

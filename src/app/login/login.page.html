@@ -1,0 +1,53 @@
+<head>
+	<title>Login V19</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="assets/images/logo.png">
+
+<!--===============================================================================================-->
+</head>
+<!-- F’in sweet Webflow Hacks -->
+
+	
+<ion-content>
+
+  <div class="limiter">
+		<div class="container-login100" >
+			<div class="wrap-login100" >
+				
+				<form class="login100-form validate-form">
+					<img alt="logo" height="25" class="center" src="assets/images/logo.png">
+					<span class="login100-form-title p-b-34">
+						FURCARE VET CLINIC SYSTEM
+					</span>
+					
+					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
+						<input id="first-name" class="input100" type="text" name="username" placeholder="User name" [(ngModel)]="username">
+						<span class="focus-input100"></span>
+					</div>
+					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
+						<input class="input100" type="password" name="pass" placeholder="Password" [(ngModel)]="password">
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" (click)="login_acc()">
+							Sign in
+						</button>
+					</div>
+
+					<div class="w-full text-center p-t-27 p-b-239">
+						
+					</div>
+
+					
+				</form>
+
+				<div class="qwe" style="background-image: url('assets/images/bg-01.png');"></div>
+			</div>
+		</div>
+	</div	>
+
+  <div id="dropDownSelect1"></div>
+
+</ion-content>

@@ -1,0 +1,462 @@
+
+ 
+    
+      
+  
+      <div class="modal-header">						
+        <label class="modal-title"> &nbsp; <i class="fas fa-notes-medical fa-2x" style="color: gold;"></i> &nbsp; CBC</label>
+        <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+      </div>
+  <div id="content" class="scroll">
+      <div class="bc-switch">
+        <ion-segment [(ngModel)]="status">
+            <ion-segment-button class="sss" value="on">
+                <ion-label>Add</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="" value="up">
+                <ion-label>View <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info">{{sortcbc.length}}</span></sup></ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+    
+    <div [hidden]="status != 'on'">
+      
+      <div class="modal-body">	
+        <div class="form-group">
+          <div class="row">
+
+            <div class="col">
+              <label>Date and Time</label>
+          <input type="datetime-local" class="form-control" [(ngModel)]="date" required>
+            </div>
+             <div class="col"></div>
+             <div class="col"></div>
+          </div>
+        </div>				
+        <div class="form-group">
+      
+       <div class="row">  
+         <div class="col"><b>Patient Name: </b><u class="results">{{patient.name}}</u></div>
+         <div class="col"> <label><b>Breed: </b><u class="results">{{patient.breed}}</u></label></div>
+         <div class="col"> <label><b>Gender: </b><u class="results">{{patient.gender}}</u></label></div>
+         <div class="col"> <label><b>Species: <i *ngIf="patient.species=='canine'"
+          class="fas fa-dog" style="color: rgb(9, 201, 214);"></i>
+        <i *ngIf="patient.species=='feline'" class="fas fa-cat" style="color: orange;"></i> &nbsp; </b><u class="results">{{patient.species}}</u></label></div>
+          
+        </div> 
+       
+        </div>
+        <div class="form-group">
+
+          
+          <div class="row">
+            <div class="col">
+              <b>WBC: </b>
+             
+              <input  type="text" class="form-control" (input)="wbc = $event.target.value;"  required>
+            </div> 
+            <div class="col">
+              <b>Lymph#: </b>
+              <input  type="text" class="form-control" (input)="lymph_num = $event.target.value;"  required>
+            </div> 
+              <div class="col">
+              <b>Mon#: </b>
+            
+              <input  type="text" class="form-control" (input)="mon_num = $event.target.value;"  required>
+            </div> 
+            <div class="col">
+              <b>Gran#: </b>
+             
+              <input  type="text" class="form-control" (input)="gran_num = $event.target.value;"  required>
+            </div> 
+            <div class="col">
+              <b>Lymph%: </b>
+              <input  type="text" class="form-control" (input)="lymph_pct = $event.target.value;"  required>
+            </div> 
+              <div class="col">
+              <b>Mon%: </b>
+            
+              <input  type="text" class="form-control" (input)="mon_pct = $event.target.value;"  required>
+            </div> 
+            <div class="col">
+              <b>Gran%: </b>
+             
+              <input  type="text" class="form-control" (input)="gran_pct = $event.target.value;"  required>
+            </div> 
+            <div class="col">
+              <b>RBC: </b>
+              <input  type="text" class="form-control" (input)="rbc = $event.target.value;"  required>
+            </div> 
+              <div class="col">
+              <b>HGB: </b>
+            
+              <input  type="text" class="form-control" (input)="hgb = $event.target.value;"  required>
+            </div> 
+            <div class="col">
+              <b>HCT: </b>
+              <input  type="text" class="form-control" (input)="hct = $event.target.value;"  required>
+            </div>
+            </div>
+            <div class="row">
+               
+                <div class="col">
+                <b>MCV: </b>
+              
+                <input  type="text" class="form-control" (input)="mcv = $event.target.value;"  required>
+              </div>
+              <div class="col">
+                <b>MCH: </b>
+              
+                <input  type="text" class="form-control" (input)="mch = $event.target.value;"  required>
+              </div>
+              <div class="col">
+                <b>MCHC: </b>
+              
+                <input  type="text" class="form-control" (input)="mchc = $event.target.value;"  required>
+              </div>
+              <div class="col">
+                <b>RDW: </b>
+              
+                <input  type="text" class="form-control" (input)="rdw = $event.target.value;"  required>
+              </div>
+              <div class="col">
+                <b>PLT: </b>
+              
+                <input  type="text" class="form-control" (input)="plt = $event.target.value;"  required>
+              </div>
+              <div class="col">
+                <b>MPV: </b>
+              
+                <input  type="text" class="form-control" (input)="mpv = $event.target.value;"  required>
+              </div>
+              <div class="col">
+                <b>PDW: </b>
+              
+                <input  type="text" class="form-control" (input)="pdw = $event.target.value;"  required>
+              </div>
+              <div class="col">
+                <b>PCT: </b>
+              
+                <input  type="text" class="form-control" (input)="pct = $event.target.value;"  required>
+              </div>
+              <div class="col">
+                <b>Eos%: </b>
+              
+                <input  type="text" class="form-control" (input)="eos_pct = $event.target.value;"  required>
+              </div>
+
+            </div>
+
+
+
+        </div>
+
+       
+            
+        <div class="form-group" style="margin-top: 10px;">
+          
+          <label><b>Veterinarian: </b></label>
+          <input class="form-control"(input)="veterinarian = $event.target.value;" required>
+        </div>
+           
+      </div>
+      
+      
+     
+  </div>
+
+
+  
+    <div [hidden]="status != 'up'">
+    
+      <ion-card *ngFor="let data of sortcbc">
+        <div class="ion-float-right">
+          <!-- <a (click)="opendit(data)"><i class="fas fa-edit"></i></a> -->
+          <a (click)="markdeletecbc(data)"><i class="fas fa-trash-alt" style="color: teal;"></i></a>
+        </div>
+        
+        <div id="mtop">
+          <label><b>Date:</b> {{data.date | date: 'medium'}}</label>
+          <label style="display: block;"><b>Veterinarian: </b>{{data.veterinarian}}</label>
+          <div class="row">
+            <div class="col">
+              
+            </div>
+            <div class="col">
+              
+            </div>
+            <div class="col">
+              
+            </div>
+            <div class="col">
+              
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">					
+          <div class="form-group">
+           
+
+         <div class="row bb">  
+           <div class="col"><b>  Patient Name: </b><u class="results">{{data.name}}</u></div>
+           <div class="col"> <label><b>Breed: </b><u class="results">{{data.breed}}</u></label></div>
+           <div class="col"> <label><b>Gender: </b><u class="results">{{data.gender}}</u></label></div>
+           <div class="col"> <label><b>Species: <i *ngIf="data.species=='canine'"
+            class="fas fa-dog" style="color: rgb(9, 201, 214);"></i>
+          <i *ngIf="data.species=='feline'" class="fas fa-cat" style="color: orange;"></i> &nbsp; </b><u class="results">{{data.species}}</u></label></div>
+          </div> 
+         
+          </div>
+          <div class="form-group">
+  
+          
+        <div *ngIf="data.species=='canine'">
+          <div class="row">
+            <div class="col">
+              <b>WBC(6.0 - 17.0) : &nbsp; </b><u class="dog-results">{{data.wbc}}</u>
+             
+     
+            </div> 
+            <div class="col">
+              <b>Lymph#(0.8 - 5.1) : &nbsp; </b><u class="dog-results">{{data.lymph_num}}</u>
+      
+            </div> 
+              <div class="col">
+              <b>Mon#(0.0 - 1.8) : &nbsp; </b><u class="dog-results">{{data.mon_num}}</u>
+            
+         
+            </div> 
+            <div class="col">
+              <b>Gran#(4.0 - 12.6) : &nbsp; </b><u class="dog-results">{{data.gran_num}}</u>
+             
+     
+            </div> 
+            
+            </div>
+  
+            <div class="row">
+              
+              <div class="col">
+                <b>Lymph%(12.0 - 30.0) : &nbsp; </b><u class="dog-results">{{data.lymph_pct}}</u>
+        
+              </div> 
+                <div class="col">
+                <b>Mon%(2.0 - 9.0) : &nbsp; </b><u class="dog-results">{{data.mon_pct}}</u>
+              
+           
+              </div> 
+              <div class="col">
+                <b>Gran%(60.0 - 83.0) : &nbsp; </b><u class="dog-results">{{data.gran_pct}}</u>
+               
+       
+              </div> 
+              <div class="col">
+                <b>RBC(5.50 - 8.50) : &nbsp; </b><u class="dog-results">{{data.rbc}}</u>
+        
+              </div> 
+            </div>
+  
+            <div class="row">
+              
+              <div class="col">
+                <b>HGB(110 - 190) : &nbsp; </b><u class="dog-results">{{data.hgb}}</u>
+        
+              </div> 
+                <div class="col">
+                  <b>HCT(39.0 - 56.0) : &nbsp; </b><u class="dog-results">{{data.hct}}</u>
+              
+           
+              </div> 
+              <div class="col">
+                <b>MCV(62.0 - 72.0) : &nbsp; </b><u class="dog-results">{{data.mcv}}</u>
+               
+       
+              </div> 
+              <div class="col">
+                <b>MCH(20.0 - 25.0) : &nbsp; </b><u class="dog-results">{{data.mch}}</u>
+        
+              </div> 
+            </div>
+  
+            <div class="row">
+              
+              <div class="col">
+                <b>MCHC(300 - 380) : &nbsp; </b><u class="dog-results">{{data.mchc}}</u>
+        
+              </div> 
+                <div class="col">
+                  <b>RDW(11.0 - 15.5) : &nbsp; </b><u class="dog-results">{{data.rdw}}</u>
+              
+           
+              </div> 
+              <div class="col">
+                <b>PLT(117 - 460) : &nbsp; </b><u class="dog-results">{{data.plt}}</u>
+               
+       
+              </div> 
+              <div class="col">
+                <b>MPV(7.0 - 12.9) : &nbsp; </b><u class="dog-results">{{data.mpv}}</u>
+        
+              </div> 
+            </div>
+  
+            <div class="row">
+              
+              <div class="col">
+                <b>PDW : &nbsp; </b><u class="dog-results">{{data.pdw}}</u>
+        
+              </div> 
+                <div class="col">
+                  <b>PCT : &nbsp; </b><u class="dog-results">{{data.pct}}</u>
+              
+           
+              </div> 
+              <div class="col">
+                <b>Eos% : &nbsp; </b><u class="dog-results">{{data.eos_pct}}</u>
+               
+       
+              </div> 
+              <div class="col">
+               
+        
+              </div> 
+            </div>
+        
+  
+          </div>
+        </div>
+
+        <div *ngIf="data.species=='feline'">
+          <div class="row">
+            <div class="col">
+              <b>WBC(5.5 - 19.5) : &nbsp; </b><u class="cat-results">{{data.wbc}}</u>
+             
+     
+            </div> 
+            <div class="col">
+              <b>Lymph#(0.8 - 7.0) : &nbsp; </b><u class="cat-results">{{data.lymph_num}}</u>
+      
+            </div> 
+              <div class="col">
+              <b>Mon#(0.0 - 1.9) : &nbsp; </b><u class="cat-results">{{data.mon_num}}</u>
+            
+         
+            </div> 
+            <div class="col">
+              <b>Gran#(2.1 - 15.0) : &nbsp; </b><u class="cat-results">{{data.gran_num}}</u>
+             
+     
+            </div> 
+            
+            </div>
+  
+            <div class="row">
+              
+              <div class="col">
+                <b>Lymph%(12.0 - 45.0) : &nbsp; </b><u class="cat-results">{{data.lymph_pct}}</u>
+        
+              </div> 
+                <div class="col">
+                <b>Mon%(2.0 - 9.0) : &nbsp; </b><u class="cat-results">{{data.mon_pct}}</u>
+              
+           
+              </div> 
+              <div class="col">
+                <b>Gran%(35.0 - 85.0) : &nbsp; </b><u class="cat-results">{{data.gran_pct}}</u>
+               
+       
+              </div> 
+              <div class="col">
+                <b>RBC(4.60 - 10.00) : &nbsp; </b><u class="cat-results">{{data.rbc}}</u>
+        
+              </div> 
+            </div>
+  
+            <div class="row">
+              
+              <div class="col">
+                <b>HGB(93 - 153) : &nbsp; </b><u class="cat-results">{{data.hgb}}</u>
+        
+              </div> 
+                <div class="col">
+                  <b>HCT(28.0 - 49.0) : &nbsp; </b><u class="cat-results">{{data.hct}}</u>
+              
+           
+              </div> 
+              <div class="col">
+                <b>MCV(39.0 - 52.0) : &nbsp; </b><u class="cat-results">{{data.mcv}}</u>
+               
+       
+              </div> 
+              <div class="col">
+                <b>MCH(13.0 - 21.0) : &nbsp; </b><u class="cat-results">{{data.mch}}</u>
+        
+              </div> 
+            </div>
+  
+            <div class="row">
+              
+              <div class="col">
+                <b>MCHC(300 - 380) : &nbsp; </b><u class="cat-results">{{data.mchc}}</u>
+        
+              </div> 
+                <div class="col">
+                  <b>RDW(14.0 - 18.0) : &nbsp; </b><u class="cat-results">{{data.rdw}}</u>
+              
+           
+              </div> 
+              <div class="col">
+                <b>PLT(100 - 514) : &nbsp; </b><u class="cat-results">{{data.plt}}</u>
+               
+       
+              </div> 
+              <div class="col">
+                <b>MPV(5.0 - 11.9) : &nbsp; </b><u class="cat-results">{{data.mpv}}</u>
+        
+              </div> 
+            </div>
+  
+            <div class="row">
+              
+              <div class="col">
+                <b>PDW : &nbsp; </b><u class="cat-results">{{data.pdw}}</u>
+        
+              </div> 
+                <div class="col">
+                  <b>PCT : &nbsp; </b><u class="cat-results">{{data.pct}}</u>
+              
+           
+              </div> 
+              <div class="col">
+                <b>Eos% : &nbsp; </b><u class="cat-results">{{data.eos_pct}}</u>
+               
+       
+              </div> 
+              <div class="col">
+               
+        
+              </div> 
+            </div>
+        
+  
+          </div>
+        </div>
+
+
+      
+      </ion-card>
+
+
+
+      
+  </div>
+ </div>
+
+ <div class="modal-footer">
+  
+  <input *ngIf="status == 'on'" type="button" class="btn btn-secondary" (click)="makePDF()"  value="Export">
+  <input *ngIf="status == 'on'" type="button" class="btn btn-secondary" (click)="dismissModal()"  value="Cancel">
+  <input *ngIf="status == 'on'" type="submit" class="btn btn-success" (click)="addcbc()" value="Add">
+  <i class="fas fa-paw fa-2x"></i>
+
+</div>

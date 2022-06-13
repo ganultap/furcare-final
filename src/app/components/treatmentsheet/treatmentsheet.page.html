@@ -1,0 +1,334 @@
+
+ 
+    
+      
+  
+      <div class="modal-header">						
+        <label class="modal-title"> &nbsp;  <label> <i class="fas fa-notes-medical fa-2x" style="color: gold;"></i> &nbsp;Treatment Sheet</label></label>
+        <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+      </div>
+      
+      <div class="treatment-switch">
+        <ion-segment [(ngModel)]="status">
+            <ion-segment-button class="sss" value="on">
+                <ion-label>Add</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="" value="up">
+                <ion-label>View <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info">{{sorttreatment.length}}</span></sup></ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+<div id="content" class="scroll">
+    <div [hidden]="status != 'on'">
+      
+      <div class="modal-body">	
+        <div class="form-group">
+          <label>Date</label>
+          <input type="datetime-local" class="form-control" [(ngModel)]="date" required>
+        </div>				
+        <div class="form-group">
+         
+
+         
+  
+
+
+
+
+          <label><b>Diagnosis/Findings: </b></label>
+          <ion-textarea type="text" class="form-control" (input)="diagnosis = $event.target.value;" required></ion-textarea>
+          
+          
+       <div class="row">  
+         <div class="col"><b>Patient Name: </b><u class="results">{{patient.name}}</u></div>
+         <div class="col"> <label><b>Breed: </b><u class="results">{{patient.breed}}</u></label></div>
+          
+          
+        </div> 
+       
+        </div>
+        <div class="form-group">
+
+        
+      <div class="row">
+        <div class="col ">
+          <b>BW: </b>
+         
+          <input  type="text" class="form-control" (input)="bw = $event.target.value;" required>
+        </div> 
+        <div class="col">
+          <b>HR: </b>
+          <input  type="text" class="form-control" (input)="hr = $event.target.value;" required>
+        </div> 
+          <div class="col">
+          <b>MM: </b>
+        
+          <input  type="text" class="form-control" (input)="mm = $event.target.value;" required>
+        </div> 
+        </div>
+        <div class="row">
+          <div class="col">
+            <b>PR: </b>
+           
+            <input  type="text" class="form-control" (input)="pr = $event.target.value;" required>
+          </div> 
+          <div class="col">
+            <b>Temp: </b>
+            <input  type="text" class="form-control" (input)="temp = $event.target.value;" required>
+          </div> 
+            <div class="col">
+            <b>RR: </b>
+          
+            <input  type="text" class="form-control" (input)="rr = $event.target.value;" required>
+          </div> 
+          </div>
+          <div class="row">
+            <div class="col">
+              <b>CRT: </b>
+             
+              <input  type="text" class="form-control" (input)="crt = $event.target.value;" required>
+            </div> 
+            <div class="col">
+              <b>BCS: </b>
+              <input  type="text" class="form-control" (input)="bcs = $event.target.value;" required>
+            </div> 
+             
+            </div>
+
+
+
+        </div>
+
+        <div class="row">
+          <div class="col"><ion-item>
+                      <ion-label><b>AM</b></ion-label>
+                      <ion-select [(ngModel)]="am" multiple="true">
+                        <ion-select-option value="Eating">Eating</ion-select-option>
+              <ion-select-option value="Drinking">Drinking</ion-select-option>
+              <ion-select-option value="Urinated">Urinated</ion-select-option>
+              <ion-select-option value="Vomit">Vomit</ion-select-option>
+              <ion-select-option value="Defecated">Defecated</ion-select-option>
+                      </ion-select>
+                    </ion-item></div>
+        
+          <div class="col"><ion-item>
+                      <ion-label><b>PM</b></ion-label>
+                      <ion-select [(ngModel)]="pm" multiple="true">
+                        <ion-select-option value="Eating">Eating</ion-select-option>
+                        <ion-select-option value="Drinking">Drinking</ion-select-option>
+                        <ion-select-option value="Urinated">Urinated</ion-select-option>
+                        <ion-select-option value="Vomit">Vomit</ion-select-option>
+                        <ion-select-option value="Defecated">Defecated</ion-select-option>
+                      </ion-select>
+                    </ion-item></div>
+                    
+        
+                    
+                  </div>
+
+
+        <div class="form-group" style="margin-top: 10px;">
+          
+          <label><b>Fluid/Rate: </b></label>
+          <input class="form-control"(input)="fluid = $event.target.value;" required>
+        </div>
+        <div class="form-group">
+          <label><b>Medication</b></label>
+          <ion-textarea autoGrow="true" type="text" class="form-control"(input)="medication = $event.target.value;" required></ion-textarea>
+      
+
+     
+          <label><b>Comments</b></label>
+          <ion-textarea autoGrow="true"  type="text" class="form-control"(input)="comments = $event.target.value;" required></ion-textarea>
+        </div>
+            
+        <div class="form-group" style="margin-top: 10px;">
+          
+          <label><b>Veterinarian: </b></label>
+          <input class="form-control"(input)="veterinarian = $event.target.value;" required>
+        </div>
+           
+      </div>
+      
+      
+     
+  </div>
+
+
+  <div [hidden]="status != 'up'">
+      <ion-card *ngFor="let data of sorttreatment" style="margin: 10px; border-radius: 3px;">
+        <div class="ion-float-right">
+          <!-- <a (click)="opendit(data)"><i class="fas fa-edit"></i></a> -->
+          <a (click)="markdeletetreatment(data)"><i class="fas fa-trash-alt" style="cursor: pointer; color: teal;"></i></a>
+        </div>
+        
+        <div id="mtop">
+          <label>Date: {{data.date | date: 'medium'}}</label>
+
+          <label style="display: block;"><b>Veterinarian: </b>{{data.veterinarian}}</label>
+        </div>
+        <div class="modal-body">					
+          <div class="form-group">
+           
+            
+  
+  
+  
+  
+            <label><b>Diagnosis/Findings: </b>{{data.diagnosis}}</label>
+       
+            
+            
+         <div class="row bb">  
+           <div class="col"><b>Patient Name: </b><u class="results">{{data.name}}</u></div>
+           <div class="col"> <label><b>Breed: </b><u class="results">{{data.breed}}</u></label></div>
+            
+            
+          </div> 
+         
+          </div>
+          <div class="form-group">
+  
+          
+        <div class="row">
+          <div class="col">
+            <b>BW: </b><u class="results">{{data.bw}}</u>
+           
+   
+          </div> 
+          <div class="col">
+            <b>HR: </b><u class="results">{{data.hr}}</u>
+    
+          </div> 
+            <div class="col">
+            <b>MM: </b><u class="results">{{data.mm}}</u>
+          
+       
+          </div> 
+          </div>
+          <div class="row">
+            <div class="col">
+              <b>PR: </b><u class="results">{{data.pr}}</u>
+             
+          
+            </div> 
+            <div class="col">
+              <b>Temp: </b><u class="results">{{data.temp}}</u>
+          
+            </div> 
+              <div class="col">
+              <b>RR: </b><u class="results">{{data.rr}}</u>
+            
+           
+            </div> 
+            </div>
+            <div class="row bb">
+              <div class="col">
+                <b>CRT: </b><u class="results">{{data.crt}}</u>
+               
+            
+              </div> 
+              <div class="col">
+                <b>BCS: </b><u class="results">{{data.bcs}}</u>
+           
+              </div> 
+              <div class="col">
+               
+           
+              </div> 
+              </div>
+  
+  
+  
+          </div>
+  
+          <div class="row bb">
+            <div class="col">
+                        <ion-label><b>AM: </b><u class="results">{{data.am}}</u></ion-label>
+                        
+                        
+                      </div>
+          
+            <div class="col">
+                        <ion-label><b>PM : </b><u class="results">{{data.pm}}</u></ion-label>
+                       
+                      
+          
+                      
+                    </div>
+  
+  
+         
+        
+              
+              
+             
+        </div>
+        <div class="row" style="margin-left: 1px">
+            <div class="form-group" style="margin-top: 10px;">
+            
+              <div>
+                <label><b>Fluid/Rate: </b></label> <br> 
+              </div>
+              <div>
+                <u class="results">{{data.fluid}}</u>
+              </div>
+         
+          </div>
+
+          
+        </div>
+
+        <div class="row" style="margin-left: 1px">
+          <div class="form-group" style="margin-top: 10px;">
+          
+            <div>
+              <label><b>Medication: </b></label> <br> 
+            </div>
+            <div>
+              <u class="results">{{data.medication}}</u>
+            </div>
+       
+        </div>
+
+        
+      </div>
+
+      <div class="row" style="margin-left: 1px">
+        <div class="form-group" style="margin-top: 10px;">
+        
+          <div>
+            <label><b>Comments: </b></label> <br> 
+          </div>
+          <div>
+            <u class="results">{{data.comments}}</u>
+          </div>
+     
+      </div>
+
+      
+    </div>
+
+
+
+
+
+
+
+      </div>
+
+      
+      </ion-card>
+
+
+      
+  </div>
+  
+ </div>
+
+ <div class="modal-footer">
+  <input *ngIf="status=='on'" type="button" class="btn btn-secondary" (click)="makePDF()"  value="Export">
+  <input *ngIf="status=='on'" type="button" class="btn btn-secondary" (click)="dismissModal()"  value="Cancel">
+  <input *ngIf="status=='on'" type="submit" class="btn btn-success" (click)="addsheet()" value="Add">
+  <i class="fas fa-paw fa-2x"></i>
+</div>

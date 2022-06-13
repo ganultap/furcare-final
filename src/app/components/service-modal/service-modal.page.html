@@ -1,0 +1,650 @@
+<div class="modal-header">
+  <label *ngIf="x == 'Vaccination'" class="modal-title"> &nbsp; <i class="icons fas fa-syringe fa-2x"></i>&nbsp; {{x}}</label>
+  <label *ngIf="x == 'Confinement'" class="modal-title"> &nbsp; <i class="icons fas fa-user-md fa-2x"></i>&nbsp; {{x}}</label>
+  <label *ngIf="x == 'Waiver'" class="modal-title"> &nbsp; <i class="icons fas fa-feather-alt fa-2x"></i>&nbsp; WAIVER</label>
+  <label *ngIf="x == 'others'" class="modal-title">&nbsp; <i class="fas fa-notes-medical fa-2x" style="color: gold;"></i> &nbsp; Other Services</label>
+  <label *ngIf="x == 'all'" class="modal-title"><i class="icons fas fa-notes-medical fa-2x"></i>&nbsp; Services Made</label>
+  <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+</div>
+
+  <div *ngIf="x == 'Vaccination'">
+    
+    <div class="modal-body" style="border-bottom: solid black; border-width: 1px;">
+      
+      <div class="form-group">
+
+        <label>Weight (in kg.)</label>
+        <input type="text" class="form-control" [(ngModel)]="weight" required>
+      </div>
+      <div class="form-group">
+      <label>Vaccination for</label>
+      <select name="usertype"  id= "against" [(ngModel)]="against"  class="form-control">
+
+        <option value="Anti-Rabies">Anti-Rabies</option>
+        <option value="Deworming">Deworming</option>
+        <option value="DHLPPI-2in1">DHLPPI-2in1</option>
+        <option value="DHLPPI-5in1">DHLPPI-5in1</option>
+        <option value="DHLPPI-6in1">DHLPPI-6in1</option>
+        <option value="DHLPPI-7in1">DHLPPI-7in1</option>
+        <option value="DHLPPI+LR">DHLPPI+LR</option>
+        <option value="Kennel Cough">Kennel Cough</option>
+        <option value="Tri Cat Trio">Tri Cat Trio</option>
+        <option value="Feline Leukemia">Feline Leukemia</option>
+        <option value="Heartworm">Heartworm</option>
+        <!-- <option value="Leptospirosis">Leptospirosis</option> -->
+        
+        
+      </select>
+    </div>
+
+    <!-- <div class="form-group">
+      <label>Against</label>
+      <ion-item>
+        <ion-select name="usertype"  id= "against" [(ngModel)]="against"  class="form-control" multiple="false">
+          <ion-select-option value="Rabies">AGAINST</ion-select-option>
+          <ion-select-option value="Rabies">Rabies</ion-select-option>
+          <ion-select-option value="Deworming">Deworming</ion-select-option>
+          <ion-select-option value="DHLPPI">DHLPPI</ion-select-option>
+          <ion-select-option value="Bordetella">Bordetella</ion-select-option>
+          <ion-select-option value="FVRCP">FVRCP</ion-select-option>
+          <ion-select-option value="Feline Leukemia">Feline Leukemia</ion-select-option>
+          <ion-select-option value="Heartworm">Heartworm</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div> -->
+
+      <!-- <label>{{photo}}</label>
+    <img *ngIf="link" class="image" [src]="link" alt="Italian Trulli">
+    <div class="form-group">						 -->
+
+      <!-- <button type="button" class="btn btn-success" (click)="image()" aria-hidden="true">Choose Photo</button> -->
+
+      <!-- </div> -->
+      <div class="form-group">
+
+        <label>Veterinarian</label>
+        <input class="form-control" [(ngModel)]="veterinarian" required>
+      </div>
+    </div>
+  </div>
+
+  
+  
+
+  <div *ngIf="x == 'Deworming'">
+    <div class="modal-header">
+      <h4 class="modal-title">{{x}}</h4>
+      <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+
+    </div>
+    <div class="modal-body" style="border-bottom: solid black; border-width: 1px;">
+      <div class="form-group">
+
+        <label>Weight (in kg.)</label>
+        <input type="text" class="form-control" [(ngModel)]="weight" required>
+      </div>
+      <div class="form-group">
+        <label>AGAINST</label>
+        <input type="text" class="form-control" [(ngModel)]="against" required>
+      </div>
+      <div class="form-group">
+
+        <label>Veterinarian</label>
+        <input class="form-control" [(ngModel)]="veterinarian" required>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="x == 'others'">
+    <!-- <div class="modal-header">
+      <label class="modal-title">&nbsp; <i class="fas fa-notes-medical fa-2x" style="color: gold;"></i> &nbsp; Other Services</label>
+      <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+    </div> -->
+    <div class="modal-body" style="border-bottom: solid black; border-width: 1px;">
+      <div class="form-group">
+        <label>SERVICE</label>
+        <select name="usertype" id="service" [(ngModel)]="service" class="form-control">
+          <option></option>
+          <option value="Nail trim and file">Nail trim and file</option>
+          <option value="Microchip">Microchip</option>
+          <option value="Express Anal Gland">Express Anal Gland</option>
+          <option value="Ear Clean if needed">Ear Clean if needed</option>
+          <option value="Heartworm Test">Heartworm Test</option>
+          <option value="Feline Leukemia/FIV Test">Feline Leukemia/FIV Test</option>
+          <option value="Grooming">Grooming</option>
+          <option value="Tick/Flea Treatment">Tick/Flea Treatment</option>
+
+
+        </select>
+      </div>
+      <div class="form-group">
+
+        <label>Weight (in kg.)</label>
+        <input type="text" class="form-control" [(ngModel)]="weight" required>
+      </div>
+      <div class="form-group">
+
+        <label>Veterinarian</label>
+        <input class="form-control" [(ngModel)]="veterinarian" required>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="x == 'Confinement'" class="scroll" >
+
+
+    
+
+      <!-- <div class="modal-header">
+        <label class="modal-title"> &nbsp; <i class="icons fas fa-user-md fa-2x"></i>&nbsp; {{x}}</label>
+        <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+
+      </div> -->
+      <ion-grid>
+
+          <div class="confine-switch">
+            <ion-segment [(ngModel)]="status">
+              <ion-segment-button class="sss" value="on">
+                <ion-label>Add</ion-label>
+              </ion-segment-button>
+              <ion-segment-button class="" value="up">
+                <ion-label>View <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info">{{sortconfinement.length}}</span></sup></ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </div>
+ 
+      <div [hidden]="status != 'on'">
+        <div class="modal-body">
+
+          <div class="row" style="border-bottom: solid black; border-width: 1px; margin-bottom: 10px;">
+            <div class="col">
+              <label style="display: block; margin-bottom: 20px"><b>Client Name: </b>{{client.name}} </label>
+              <label style="display: block; margin-bottom: 20px"><b>Pet's Name: </b>{{patient.name}} </label>
+              <label style="display: block; margin-bottom: 20px"><b>Cellphone No.: </b>{{client.mobile_number}} </label>
+              <label style="display: block; margin-bottom: 20px"><b>Address: </b>{{client.address}} </label>
+
+            </div>
+            <div class="col">
+              <label style="display: block; margin-bottom: 20px"><b>Date: </b>{{date | date}} </label>
+              <label style="display: block; margin-bottom: 20px"><b>Breed: </b>{{patient.breed}}</label>
+              <label style="display: block; margin-bottom: 20px"><b>DOB: </b>{{patient.birth}} </label>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+
+            <label><b>Procedure: </b></label>
+            <input type="text" class="form-control" [(ngModel)]="confinement_procedure" required>
+          </div>
+          <div class="form-group" style="margin-top: 10px; width: 50vh;">
+
+            <label><b>Veterinarian: </b></label>
+            <input class="form-control" [(ngModel)]="veterinarian" required>
+          </div>
+          <div class="form-group">
+
+            <pre>
+                                              <b> CONSENT FOR TREATMENT</b>
+  I agree to have my pet treated and confined at FURCARE Veterinary Clinic subject to the following conditions:
+    1. Confined pets can be visited from 10:00 am to 6:00 pm Mondays to Saturdays and 10:00am to 4:00 pm on
+        Sundays.
+    2. I authorize the whole staff to perform all the necessary diagnostic tests.
+    3. I have been informed that the estimated cost of treatment is <input type="text" [(ngModel)]="estimated_cost"> per day. I understand that the
+       estimated cost per day does not include surgery, laboratory test, x ray, pet food and other confinement
+       expenses apart from the usual supportive medications.
+    4. A deposit of <input type="text" [(ngModel)]="deposit"> is required upon checking in and the subsequent deposits will be required daily to
+       cover for medications.
+    5. The clinic and its staff shall not be held liable for any accident or loss beyond the control during the confinement.
+    6. When the pet is ready for discharge, the owner will be notified and the account must be settled promptly. The
+       deposit will be dedecuted from the total billing and a 24 hour grace period shall be given to the owner to claim
+       their pet after being notified. Unclaimed animals shall be considered abandoned and maybe put up for
+       adoption. It is understood that this does not relieve the owner from the cost of treatment.
+    7. In case of death the owner will be immediately notifed and the account must be settled accordingly. The body
+       must be claimed within 24 hours after being notified. If the owner fails to claim the body within specific
+       time, the staff will dispose the cadaver and necessary fees will apply.
+    8. Cut-off time is 12:00 noon. Patients taken beyond this time shall incur additional charges.
+
+    <input type="datetime-local" [(ngModel)]="date_of_addmision">                             
+    Date/Time of admission
+
+    <input type="datetime-local" [(ngModel)]="date_of_release">                                               
+    Date/Time of Release
+
+    <label><b>Photo of signature: </b></label>    
+    <input [(ngModel)]="signatureinput" (change)="selectedFile2($event)" type="file" name="file" size="2" accept="image/*" style="background-color:#fff; font-size: 12px;" required="required" />
+
+
+      </pre>
+          </div>
+
+
+        </div>
+      </div>
+      
+
+      <div [hidden]="status != 'up'">
+        <ion-searchbar class="searchbar" placeholder="Search date (yyyy-mm-dd)" [(ngModel)]="filter"></ion-searchbar>
+        <div class="d-flex justify-content-center">
+          <pagination-controls responsive="true" previousLabel="Prev" nextLabel="Next"
+            (pageChange)="onTableDataChange2($event)" maxSize="5">
+          </pagination-controls>
+        </div>
+        <div *ngFor="let data of sortconfinement | filter: filter | paginate : {
+    itemsPerPage: 1,
+    currentPage: page2,
+    totalItems: count2
+  };">
+        <ion-card>
+          <label class="bb" style="display: block;"><b>Date Added: </b>{{data.date_added | date: 'medium'}}</label>
+          <div class="modal-body">
+
+            <div class="row bb">
+              <div class="col">
+                <label style="display: block; margin-bottom: 20px"><b>Client Name: </b>{{client.name}} </label>
+                <label style="display: block; margin-bottom: 20px"><b>Pet's Name: </b>{{patient.name}} </label>
+                <label style="display: block; margin-bottom: 20px"><b>Cellphone No.: </b>{{client.mobile_number}}
+                </label>
+                <label style="display: block; margin-bottom: 20px"><b>Address: </b>{{client.address}} </label>
+
+              </div>
+              <div class="col">
+                <button (click)="markdeleteconfinement(data)"
+                  style="background: none;display: inline; float: right;font-size: 25px; color: teal;"><i
+                    class="far fa-trash-alt"></i></button>
+
+                <label style="display: block; margin-bottom: 20px"><b>Date: </b>{{data.date_added | date}} </label>
+                <label style="display: block; margin-bottom: 20px"><b>Breed: </b>{{patient.breed}}</label>
+                <label style="display: block; margin-bottom: 20px"><b>DOB: </b>{{patient.birth}} </label>
+              </div>
+              <label class="slanted" *ngIf="data.released== 1"
+                style="display: block; margin-bottom: 20px; float: right;"><b>RELEASED</b></label>
+            </div>
+
+            <div class="form-group">
+              <input *ngIf="data.released == 0" type="button" class="btn btn-success" (click)="alertrelease(data)"
+                value="RELEASE and UPDATE" style="margin: 20px; float:right">
+              <input *ngIf="data.released == 0" type="button" class="btn btn-success" (click)="alertrelease1(data)"
+                value="RELEASE and RETAIN RELEASE DATE" style="margin: 20px; float:right;">
+              <label><b>Procedure: <u>{{data.confinement_procedure}}</u></b></label>
+
+            </div>
+
+            <div class="form-group">
+
+
+              <label><b>Veterinarian: <u>{{data.veterinarian}}</u></b></label>
+            </div>
+
+            <div class="form-group">
+
+              <pre>
+                                              <b> CONSENT FOR TREATMENT</b>
+  I agree to have my pet treated and confined at FURCARE Veterinary Clinic subject to the following conditions:
+    1. Confined pets can be visited from 10:00 am to 6:00 pm Mondays to Saturdays and 10:00am to 4:00 pm on
+        Sundays.
+    2. I authorize the whole staff to perform all the necessary diagnostic tests.
+    3. I have been informed that the estimated cost of treatment is <b><u>{{data.estimated_cost}}</u></b> per day. I understand that the
+       estimated cost per day does not include surgery, laboratory test, x ray, pet food and other confinement
+       expenses apart from the usual supportive medications.
+    4. A deposit of <b><u>{{data.deposit}}</u></b> is required upon checking in and the subsequent deposits will be required daily to
+       cover for medications.
+    5. The clinic and its staff shall not be held liable for any accident or loss beyond the control during the confinement.
+    6. When the pet is ready for discharge, the owner will be notified and the account must be settled promptly. The
+       deposit will be dedecuted from the total billing and a 24 hour grace period shall be given to the owner to claim
+       their pet after being notified. Unclaimed animals shall be considered abandoned and maybe put up for
+       adoption. It is understood that this does not relieve the owner from the cost of treatment.
+    7. In case of death the owner will be immediately notifed and the account must be settled accordingly. The body
+       must be claimed within 24 hours after being notified. If the owner fails to claim the body within specific
+       time, the staff will dispose the cadaver and necessary fees will apply.
+    8. Cut-off time is 12:00 noon. Patients taken beyond this time shall incur additional charges.
+
+    <label><b><u>{{data.date_of_addmision | date: 'medium'}}</u></b></label>
+    Date/Time of admission
+
+    <label><b><u>{{data.date_of_release | date : 'medium' }}</u></b></label>
+    Date/Time of Release
+    
+    <label *ngIf="data.signature != ''"><b>Signature over printed name </b></label> 
+    <button (click)="viewphoto(data.photolink)" style="background: none;"><img *ngIf="data.signature != ''" style="width: 150px; height: 80px;" [src]='data.photolink' alt="Italian Trulli"></button>
+
+
+
+      </pre>
+            </div>
+
+            
+          </div>
+        </ion-card>
+        </div>
+        
+      </div>
+    </ion-grid>
+
+  </div>
+
+  <div *ngIf="x == 'Waiver'" class="scroll" >
+
+
+    
+
+      <!-- <div class="modal-header">
+        <label class="modal-title"> &nbsp; <i class="icons fas fa-feather-alt fa-2x"></i>&nbsp; WAIVER</label>
+        <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+      </div> -->
+
+      <ion-grid>
+          <div class="confine-switch">
+            <ion-segment [(ngModel)]="status">
+              <ion-segment-button class="sss" value="on">
+                <ion-label>Add</ion-label>
+              </ion-segment-button>
+              <ion-segment-button class="" value="up">
+                <ion-label>View <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info">{{sortwaiver.length}}</span></sup></ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </div>
+ 
+      <div [hidden]="status != 'on'">
+        <div class="modal-body">
+
+          <div class="row" style="border-bottom: solid black; border-width: 1px; margin-bottom: 10px;">
+            <div class="col">
+              <label style="display: block; margin-bottom: 20px"><b>Client Name: </b>{{client.name}} </label>
+              <label style="display: block; margin-bottom: 20px"><b>Pet's Name: </b>{{patient.name}} </label>
+              <label style="display: block; margin-bottom: 20px"><b>Cellphone No.: </b>{{client.mobile_number}} </label>
+              <label style="display: block; margin-bottom: 20px"><b>Address: </b>{{client.address}} </label>
+
+            </div>
+            <div class="col">
+              <label style="display: block; margin-bottom: 20px"><b>Date: </b>{{date | date}} </label>
+              <label style="display: block; margin-bottom: 20px"><b>Breed: </b>{{patient.breed}}</label>
+              <label style="display: block; margin-bottom: 20px"><b>DOB: </b>{{patient.birth}} </label>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+
+            <pre>
+                                              <b> WAIVER REFUSAL FOR TREATMENT CONSENT </b>
+
+I <b>{{client.name}} </b> have been advised by Dr. <input type="text" [(ngModel)]="veterinarian"> that the following treatment, <input type="text" [(ngModel)]="treatment">, should be given to my pet <b><u>{{patient.name}}.</u></b> 
+      
+The doctor has fully explained to me the nature, purpose, risks, and benefits of the proposed treatment, the possible alternatives thereto, and the risks and consequences of not proceeding. I nonetheless refuse to consent to the proposed treatment.
+
+I have been given an opportunity to ask questions, and all of my questions have been answered fully and satisfactorily.
+
+I hereby release the clinic, its employees and medical staff, medical students, and the attending veterinarian from any liability for ill effects that may result from my decision to refuse to consent to the proposed treatment. I confirm that I have read and fully understand the above and that all the blank spaces were completed prior to my 
+signing.
+
+
+<label><b>Photo of the Owner's signature: </b></label>    
+<input [(ngModel)]="signatureinput1" (change)="selectedFile3($event)" type="file" name="file" size="2" accept="image/*" style="background-color:#fff; font-size: 12px;" required="required" />
+
+Witness: <input type="text" [(ngModel)]="witness">
+<label><b>Photo of the witness' signature: </b></label>    
+<input [(ngModel)]="signatureinput2" (change)="selectedFile4($event)" type="file" name="file" size="2" accept="image/*" style="background-color:#fff; font-size: 12px;" required="required" />
+
+<div class="bb"></div>
+                                              <b>VETERINARIAN CERTIFICATION</b>
+
+I hereby certify that I have explained the nature and purposes of, and alternatives to, the proposed treatment mentioned above, and the risks and consequences of not proceeding. I have offered to answer any questions and have fully answered all such questions. I believe that the guardian/owner of the patient fully understands what I have 
+explained and answered.
+
+
+<label><b>Photo of Vet's signature: </b></label>    
+<input [(ngModel)]="signatureinput3" (change)="selectedFile5($event)" type="file" name="file" size="2" accept="image/*" style="background-color:#fff; font-size: 12px;" required="required" />
+
+
+      </pre>
+          </div>
+
+
+        </div>
+      </div>
+      
+
+      <div [hidden]="status != 'up'">
+        <ion-searchbar class="searchbar" placeholder="Search date (yyyy-mm-dd)" [(ngModel)]="filter"></ion-searchbar>
+        <div class="d-flex justify-content-center">
+          <pagination-controls responsive="true" previousLabel="Prev" nextLabel="Next"
+            (pageChange)="onTableDataChange2($event)" maxSize="5">
+          </pagination-controls>
+        </div>
+        <div *ngFor="let data of sortwaiver | filter: filter | paginate : {
+    itemsPerPage: 1,
+    currentPage: page2,
+    totalItems: count2
+  };">
+        <ion-card>
+          <label class="bb" style="display: block;"><b>Date Added: </b>{{data.date_added | date: 'medium'}}</label>
+          <div class="modal-body x">
+
+            <div class="row bb">
+              <div class="col">
+                <label style="display: block; margin-bottom: 20px"><b>Client Name: </b>{{client.name}} </label>
+                <label style="display: block; margin-bottom: 20px"><b>Pet's Name: </b>{{patient.name}} </label>
+                <label style="display: block; margin-bottom: 20px"><b>Cellphone No.: </b>{{client.mobile_number}}
+                </label>
+                <label style="display: block; margin-bottom: 20px"><b>Address: </b>{{client.address}} </label>
+
+              </div>
+              <div class="col">
+                <button (click)="markdeletewaiver(data)"
+                  style="background: none;display: inline; float: right;font-size: 25px; color: teal;"><i
+                    class="far fa-trash-alt"></i></button>
+
+                <label style="display: block; margin-bottom: 20px"><b>Date: </b>{{data.date_added | date}} </label>
+                <label style="display: block; margin-bottom: 20px"><b>Breed: </b>{{patient.breed}}</label>
+                <label style="display: block; margin-bottom: 20px"><b>DOB: </b>{{patient.birth}} </label>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <pre>
+                                              <b> WAIVER REFUSAL FOR TREATMENT CONSENT </b>
+
+I <b>{{client.name}} </b> have been advised by Dr. <b><u>{{data.veterinarian}}</u></b> that the following treatment, <b><u>{{data.treatment}}</u></b>, should be given to my pet <b><u>{{patient.name}}.</u></b> 
+
+The doctor has fully explained to me the nature, purpose, risks, and benefits of the proposed treatment, the possible alternatives thereto, and the risks and consequences of not proceeding. I nonetheless refuse to consent to the proposed treatment.
+
+I have been given an opportunity to ask questions, and all of my questions have been answered fully and satisfactorily.
+
+I hereby release the clinic, its employees and medical staff, medical students, and the attending veterinarian from any liability for ill effects that may result from my decision to refuse to consent to the proposed treatment.
+
+I confirm that I have read and fully understand the above and that all the blank spaces were completed prior to my signing.
+
+<button (click)="viewphoto(data.photolink1)" style="background: none;"><img *ngIf="data.owner_signature != ''" style="width: 150px; height: 80px;" [src]='data.photolink1' alt="Italian Trulli"></button>
+<label class="up bt" *ngIf="data.owner_signature != ''"><b>{{client.name}} | Owner</b></label>    
+
+
+<button (click)="viewphoto(data.photolink2)" style="background: none;"><img *ngIf="data.witness_signature != ''" style="width: 150px; height: 80px;" [src]='data.photolink2' alt="Italian Trulli"></button>
+<label class="up bt" *ngIf="data.witness_signature != ''"><b>{{data.witness}} | Witness</b></label>    
+
+
+                                                   <b>VETERINARIAN CERTIFICATION</b>
+
+I hereby certify that I have explained the nature and purposes of, and alternatives to, the proposed treatment mentioned above, and the risks and consequences of not proceeding. I have offered to answer any questions and have fully answered all such questions. I believe that the guardian/owner of the patient fully understands what I have explained and answered.
+
+<button (click)="viewphoto(data.photolink3)" style="background: none;"><img *ngIf="data.vet_signature != ''" style="width: 150px; height: 80px;" [src]='data.photolink3' alt="Italian Trulli"></button>
+<label class="up bt" *ngIf="data.vet_signature != ''"><b>Dr. <b>{{data.veterinarian}}</b> | Veterinarian </b></label>    
+
+
+      </pre>
+            </div>
+
+            
+          </div>
+        </ion-card>
+        </div>
+        
+      </div>
+    </ion-grid>
+
+  </div>
+
+
+
+  <div *ngIf="x != 'all'" class="modal-footer">
+    <!-- <input type="button" class="btn btn-default" (click)="dismissModal()" value="Cancel"> -->
+    <input *ngIf="x != 'Confinement' && x != 'Waiver'" type="button" class="btn btn-secondary" (click)="makePDF()"  value="Export">
+    <input *ngIf="x != 'Confinement' && x != 'Waiver'" type="submit" class="btn btn-success" (click)="serve()" value="Serve">
+    <input *ngIf="x == 'Confinement' && status =='on'" type="submit" class="btn btn-success" (click)="confineserve()" value="Confine">
+    <input *ngIf="x == 'Waiver' && status =='on'" type="submit" class="btn btn-success" (click)="waiverserve()" value="Add Waiver">
+    <i class="fas fa-paw fa-2x" style="color: white;"></i>
+  </div>
+
+
+
+
+
+  <div *ngIf="x != 'all' && x != 'Confinement' && x != 'Waiver'" class="row" style="margin: auto; overflow: auto; scroll-behavior: auto;">
+  
+    <div class="table-wrapper" >
+      <div class="table-responsive">
+       
+        <ion-searchbar class="searchbar" style="width: 400px; display: inline; float: left;" [(ngModel)]="filter"></ion-searchbar>
+          <table class="table" id="myTable">
+            <thead>
+              <tr  style="text-align: center;">
+                <th >DATE</th>
+                <th *ngIf="this.x =='others'" >SERVICE</th>
+                <th >SESSION</th>
+                
+                <th >WEIGHT (in kg.)</th>
+                <th style="width: 200px;"></th>
+                <th>AGAINST</th>
+                
+            
+                <th >VETERINARIAN</th>
+                <th style="width: 160px; text-align: center;" >ACTION</th>
+              
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of sortservice | filter : filter | paginate : {
+                itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count
+              };" [ngClass]="{'my_class': data.done == 1}" >
+                <td *ngIf="!data.isEdit"><b *ngIf="mobile">DATE: </b>{{data.service_date | date}}</td>
+                <td *ngIf="data.isEdit"><b *ngIf="mobile"></b><input style="width: 150px;" type="date" [(ngModel)]="data.service_date"></td>
+  
+                <td *ngIf="this.x =='others'"><b *ngIf="mobile">SERVICE: </b>{{data.service_type}}</td>
+                <td style="text-align: center;"><b *ngIf="mobile">SESSION: </b>{{data.session}}</td>
+                <td *ngIf="!data.isEdit"><b *ngIf="mobile">WEIGHT: </b>{{data.weight}}</td>
+                <td *ngIf="data.isEdit"><b *ngIf="mobile">WEIGHT: </b><input type="text" class="form-control" name="weight" [(ngModel)]="data.weight" style="width: 120px;"></td>
+  
+                <td *ngIf="data.isEdit"><input [(ngModel)]="photoinput" (change)="selectedFile($event)" type="file" name="file" size="2" accept="image/*" style="background-color:#fff; font-size: 12px; width: 170px;" required="required" /></td>
+                <td  *ngIf="!data.isEdit"><button (click)="viewphoto(data.photolink)" style="background: none;"><img *ngIf="data.photo != ''" style="width: 150px; height: 80px;" [src]='data.photolink' alt="Italian Trulli"></button></td>
+                <td><b *ngIf="mobile">AGAINST: </b> {{data.against}}</td>
+                
+               
+                <td *ngIf="!data.isEdit"><b *ngIf="mobile">VETERINARIAN: </b>{{data.veterinarian}}</td>
+                <td *ngIf="data.isEdit"><b *ngIf="mobile">VETERINARIAN: </b><input type="text" class="form-control" name="veterinarian" [(ngModel)]="data.veterinarian" style="width: 120px;"></td>
+                <td style="text-align: center;"><button *ngIf="!data.isEdit" (click)="edit(data)" style="background: none; display: inline;"><i class="fas fa-edit"></i></button><button *ngIf="data.isEdit" (click)="save(data)" style="background: none; display: inline;"><i class="fas fa-check-double"></i></button>
+               <button *ngIf="data.isEdit" (click)="cancel(data)" style="background: none; display: inline;">Cancel</button>
+                  <button *ngIf="!data.isEdit" (click)="markdelete(data)" style="background: none;display: inline;"><i class="far fa-trash-alt"></i></button><button *ngIf="!data.isEdit" (click)="markalert(data)" style="background: none;display: inline;"><i class="far fa-check-square"></i></button></td>
+                
+                
+              </tr>
+            
+             
+              
+              
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-center">
+            <pagination-controls 
+              responsive="true" 
+              previousLabel="Prev" 
+              nextLabel="Next" 
+              (pageChange)="onTableDataChange($event)"
+              maxSize="7">
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      
+  <div *ngIf="x == 'all'">
+    <!-- <div class="modal-header">
+      <label class="modal-title"><i class="icons fas fa-notes-medical fa-2x"></i>&nbsp; Services Made</label>
+      <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+    </div> -->
+
+    <div class="row" style="margin: auto; overflow: auto; scroll-behavior: auto;">
+      <ion-searchbar class="searchbar" style="width: 400px; display: inline; float: left;" [(ngModel)]="filter">
+      </ion-searchbar>
+      <div class="table-wrapper">
+        <div class="table-responsive">
+
+
+          <table class="table scroll" id="myTable">
+            <thead>
+              <tr style="text-align: center;">
+                <th>DATE</th>
+                <th>SERVICE</th>
+
+                <th>WEIGHT (in kg.)</th>
+                <th style="width: 300px;"></th>
+                <th>AGAINST</th>
+
+
+                <th>VETERINARIAN</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of sortallservice  | filter : filter | paginate : {
+                    itemsPerPage: tableSize1,
+                    currentPage: page1,
+                    totalItems: count1
+                  };" [ngClass]="{'my_class': data.done == 1}">
+                <td><b *ngIf="mobile">DATE: </b>{{data.service_date | date}}</td>
+                <td><b *ngIf="mobile">SERVICE: </b>{{data.service_type}}</td>
+
+                <td><b *ngIf="mobile">WEIGHT: </b>{{data.weight}}</td>
+                <td><button (click)="viewphoto(data.photolink)" style="background: none;"><img *ngIf="data.photo != ''"
+                      style="width: 150px; height: 80px;" [src]='data.photolink' alt="Italian Trulli"></button></td>
+                <td><b *ngIf="mobile">AGAINST: </b>{{data.against}}</td>
+
+
+                <td><b *ngIf="mobile">VETERINARIAN: </b>{{data.veterinarian}}</td>
+
+
+              </tr>
+
+
+
+
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-center">
+            <pagination-controls responsive="true" previousLabel="Prev" nextLabel="Next"
+              (pageChange)="onTableDataChange1($event)" maxSize="7">
+            </pagination-controls>
+          </div>
+
+          
+        </div>
+        
+      </div>
+    </div>
+
+    
+  </div>
+  
+
+
+
+
+
+
+

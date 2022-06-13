@@ -1,0 +1,25 @@
+<div class="modal-header justify-content-center">
+  <label for="modal-header"><i class="fas fa-feather-alt fa-2x" style="color: gold;"></i><b>WAIVER</b></label>
+</div>
+<div class="modal-body">
+
+  <div class="row" style="border-bottom: solid black; border-width: 1px; margin-bottom: 10px;">
+    <div class="col">
+      <label style="display: block; margin-bottom: 20px"><b>Client Name: </b>{{client.name}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Pet's Name: </b>{{patient.name}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Cellphone No.: </b>{{client.mobile_number}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Address: </b>{{client.address}} </label>
+
+    </div>
+
+    <div class="col">
+      <label style="display: block; margin-bottom: 20px"><b>Date: </b>{{date | date}} </label>
+      <label style="display: block; margin-bottom: 20px"><b>Breed: </b>{{patient.breed}}</label>
+      <label style="display: block; margin-bottom: 20px"><b>DOB: </b>{{patient.birth}} </label>
+    </div>
+
+  </div>
+</div>
+<div class="modal-footer">
+  <i class="fas fa-paw text-right"></i>
+</div>

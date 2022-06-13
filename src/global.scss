@@ -1,0 +1,117 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+.service-popover .popover-content{ width: 165px; 
+
+    border: solid green;
+    border-width: 1px;
+}
+
+.photo-popover .popover-content{ width: 50vh; height: 50%;
+
+    border: solid green;
+    border-width: 1px;
+    
+}
+.viewphoto-popover .popover-content{ width: 50vh; min-height: 70%;
+
+    border: solid green;
+    border-width: 1px;
+    
+}
+
+.viewphoto1-popover .popover-content{ width: 100%; min-height: 70%;
+
+    border: solid green;
+    border-width: 1px;
+    
+}
+.servicemodal {
+    --width: 1200px
+
+
+}
+
+.servicemodal1 {
+    --width: 1100px
+
+
+}
+.notify-popover .popover-content{ height: 500px; 
+
+    border-radius: 7px;
+    border-width: 1px;
+}
+
+.cal-modal {
+
+    --height: 80%;
+    --border-radius: 10px   ;
+    padding: 25px;
+   
+}
+.med-modal{
+    --height: 90%;
+    --width: 40%;
+    --border-radius: 7px;
+    
+
+}
+
+
+@media only screen and (max-width: 600px) { 
+
+    
+    .med-modal{
+        --height: 100% !important;
+        --width: 100% !important;
+        --border-radius: 7px !important;
+    
+    }
+
+    .servicemodal {
+        --width: 100%;
+    
+    
+    }
+
+
+
+}
+
+@media only screen and (max-width: 600px) {
+
+
+    .wrapper{
+
+        margin: auto !important;
+    }
+    
+
+
+
+
+}

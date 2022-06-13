@@ -1,0 +1,43 @@
+
+<div *ngIf="notif.length == 1" class="modal-header" style="text-align: center;">
+  <h4 class="text-center"> &nbsp; <i class="far fa-calendar-check"></i> &nbsp; New Schedule</h4>
+</div>
+
+<div *ngIf="notif.length >= 2" class="modal-header" style="text-align: center;">
+  <h4 class="text-center"> &nbsp; <i class="far fa-calendar-check"></i> &nbsp; New Schedules</h4>
+</div>
+
+<div *ngIf="notif.length == 0" class="modal-header" style="text-align: center;">
+  <h4 class="text-center"> &nbsp; <i class="far fa-calendar-times"></i> &nbsp; No Schedule</h4>
+</div>
+
+  <div class="modal-card notification" *ngFor="let data of notif; let i = index">
+    
+    <ion-list class="lista">
+      <li class="text">  
+        
+        <p>
+          <b>Title: </b>{{data.title}}<br>
+          <b>Description: </b> {{data.description}}<br>
+          <b>Date: </b>{{data.startTime | date}} <br>
+          <b *ngIf="data.clientname">Client: </b>{{data.clientname}}<br>
+          <b *ngIf="data.patientname">Patient: </b>{{data.patientname}}<br>
+          <b *ngIf="data.session">Session: </b>{{data.session}}
+
+
+        </p>
+
+
+      </li>
+
+
+
+    </ion-list>
+  </div>
+
+
+
+
+
+
+

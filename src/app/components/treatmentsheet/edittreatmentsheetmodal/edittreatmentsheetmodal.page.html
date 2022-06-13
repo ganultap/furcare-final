@@ -1,0 +1,136 @@
+<ion-content>
+
+
+    <div class="modal-header">						
+      <h4 class="modal-title">Edit Treatment Sheet</h4>
+      <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+    </div>
+
+
+
+    <div class="modal-body">	
+	
+      <div class="form-group">
+
+        <label><b>Diagnosis/Findings: </b></label>
+        <ion-textarea type="text" class="form-control" (input)="diagnosis = $event.target.value;" required></ion-textarea>
+        
+        
+     <div class="row">  
+       <div class="col"><b>Patient Name: </b><u>{{patient.name}}</u></div>
+       <div class="col"> <label><b>Breed: </b><u>{{patient.breed}}</u></label></div>
+        
+        
+      </div> 
+     
+      </div>
+      <div class="form-group">
+
+      
+    <div class="row">
+      <div class="col">
+        <b>BW: </b>
+       
+        <input  type="text" class="form-control" (input)="bw = $event.target.value;" required>
+      </div> 
+      <div class="col">
+        <b>HR: </b>
+        <input  type="text" class="form-control" (input)="hr = $event.target.value;" required>
+      </div> 
+        <div class="col">
+        <b>MM: </b>
+      
+        <input  type="text" class="form-control" (input)="mm = $event.target.value;" required>
+      </div> 
+      </div>
+      <div class="row">
+        <div class="col">
+          <b>PR: </b>
+         
+          <input  type="text" class="form-control" (input)="pr = $event.target.value;" required>
+        </div> 
+        <div class="col">
+          <b>Temp: </b>
+          <input  type="text" class="form-control" (input)="temp = $event.target.value;" required>
+        </div> 
+          <div class="col">
+          <b>RR: </b>
+        
+          <input  type="text" class="form-control" (input)="rr = $event.target.value;" required>
+        </div> 
+        </div>
+        <div class="row">
+          <div class="col">
+            <b>CRT: </b>
+           
+            <input  type="text" class="form-control" (input)="crt = $event.target.value;" required>
+          </div> 
+          <div class="col">
+            <b>BCS: </b>
+            <input  type="text" class="form-control" (input)="bcs = $event.target.value;" required>
+          </div> 
+           
+          </div>
+
+
+
+      </div>
+
+      <div class="row">
+        <div class="col"><ion-item>
+                    <ion-label><b>AM</b></ion-label>
+                    <ion-select [(ngModel)]="am" multiple="true">
+                      <ion-select-option value="Eating">Eating</ion-select-option>
+            <ion-select-option value="Dringking">Drinking</ion-select-option>
+            <ion-select-option value="Urinated">Urinated</ion-select-option>
+            <ion-select-option value="Vomit">Vomit</ion-select-option>
+            <ion-select-option value="Defecated">Defecated</ion-select-option>
+                    </ion-select>
+                  </ion-item></div>
+      
+        <div class="col"><ion-item>
+                    <ion-label><b>PM</b></ion-label>
+                    <ion-select [(ngModel)]="pm" multiple="true">
+                      <ion-select-option value="Eating">Eating</ion-select-option>
+                      <ion-select-option value="Dringking">Drinking</ion-select-option>
+                      <ion-select-option value="Urinated">Urinated</ion-select-option>
+                      <ion-select-option value="Vomit">Vomit</ion-select-option>
+                      <ion-select-option value="Defecated">Defecated</ion-select-option>
+                    </ion-select>
+                  </ion-item></div>
+                  
+      
+                  
+                </div>
+
+
+      <div class="form-group" style="margin-top: 10px;">
+        
+        <label><b>Fluid/Rate: </b></label>
+        <input class="form-control"(input)="fluid = $event.target.value;" required>
+      </div>
+      <div class="form-group">
+        <label>Medication</label>
+        <ion-textarea autoGrow="true" type="text" class="form-control"(input)="medication = $event.target.value;" required></ion-textarea>
+    
+
+   
+        <label>Comments</label>
+        <ion-textarea autoGrow="true"  type="text" class="form-control"(input)="comments = $event.target.value;" required></ion-textarea>
+      </div>
+          
+      <div class="form-group" style="margin-top: 10px;">
+        
+        <label><b>Veterinarian: </b></label>
+        <input class="form-control"(input)="veterinarian = $event.target.value;" required>
+      </div>
+         
+    </div>
+    
+    <div class="modal-footer">
+      <input type="button" class="btn btn-default" (click)="dismissModal()"  value="Cancel">
+      <input type="submit" class="btn btn-success" (click)="update_sheet()" value="update">
+    </div>
+   
+
+</ion-content>

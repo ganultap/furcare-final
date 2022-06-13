@@ -1,0 +1,39 @@
+<div class="modal-header" style="color: white; border-radius: 3px;">
+
+  <button style="color: white; margin-left: 15px;" type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+  <label style="text-align: left !important;"><i class="fas fa-calendar-plus fa-2x" style="color: gold;"></i> &nbsp; SCHEDULE</label>
+  <button style="color: white; margin-right: 15px;" type="button" class="close" (click)="save()" aria-hidden="true">
+    <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+  </button>
+</div>
+<div class="modal-body scroll">
+  <div class="form-group">
+    <label style="display: block; font-weight: bold;"></label>
+    <label>Title</label>
+    <input type="text" class="form-control" (input)="event.title = $event.target.value;" required>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea type="text" class="form-control" (input)="event.desc = $event.target.value;" required></textarea>
+
+    <!-- <input type="datetime-local" id="meeting-time"
+     name="meeting-time" value="{{minDate}}"
+     min="minDate">
+     <input type="datetime-local" id="meeting-time"
+     name="meeting-time" value="{{minDate}}"
+     min="minDate"> -->
+  </div>
+  <div>
+    <button fill="clear" (click)="back()">
+      <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+    </button>
+
+    <button style="float: right;" fill="clear" (click)="next()">
+      <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+    </button>
+    <h2 style="text-align: center;">{{ viewTitle }}</h2>
+    <calendar *ngIf="modalReady" [eventSource]="eventSource" [calendarMode]="calendar.mode"
+      [currentDate]="calendar.currentDate" (onEventSelected)="onEventSelected($event)"
+      (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)">
+    </calendar>
+  </div>

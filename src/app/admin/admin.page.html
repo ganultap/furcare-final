@@ -1,0 +1,180 @@
+<title>ADMIN</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/images/logo.png">
+
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
+  <a href='#/admin' class="navbar-brand" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+    <img alt="logo" height="25" src="assets/images/logo.png">
+
+    <b>FURCARE SYSTEM</b></a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <!-- Collection of nav links, forms, and other content for toggling -->
+  <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="margin-right: 50px;">
+
+    <div class="navbar-nav ml-auto" style="margin-right: 40px;">
+      <a href='#/admin' class="nav-item nav-link active"><i style="color:teal" class="fas fa-home"></i>&nbsp;Home</a>
+      <a href='#/reports' class="nav-item nav-link"><i style="color: crimson;"
+          class="fas fa-notes-medical"></i>&nbsp;Reports</a>
+      <div *ngIf="currentuser.usertype == 'admin'">
+        <a href='#/manage-users' class="nav-item nav-link"><i style="color: rgba(13, 107, 49, 0.904);"
+            class="fas fa-users"></i>&nbsp;Manage Users</a>
+      </div>
+    </div>
+
+  </div>
+
+
+  <a (click)="notifypop($event)" class="nav-item nav-link notifications"
+    style="margin: auto; color: black;cursor:pointer"><i class="fa fa-bell-o fa-2x"></i><span
+      class="badge">{{notifydata2.length+ notifydata4.length}}</span></a>
+
+  <button (click)="marklogout()" style="background: none;"> Logout</button>
+  <a style="margin: auto;" (click)="marklogout()" class="nav-link dropdown-toggle user-action"></a>
+  <!-- (click)="acc_popover($event)" -->
+
+
+</nav>
+ 
+
+
+ 
+<ion-content>
+  
+ 
+  
+
+  <ion-card class="wrapper">
+  <div class="w3-container" >
+    <!-- <label style="display: block;">Count: {{clients.length}}</label> -->
+  <ion-grid>
+    <ion-row>
+      
+  
+ 
+  <div style="margin-bottom: 20px;" class="w3-center"  >
+    
+    <div style="margin-left: 25px; margin-bottom: 40px; margin-top: 20px;" class="zxc">
+    <ion-searchbar class="searchbar"[(ngModel)]="filter" placeholder="Client Search" id="sb"></ion-searchbar>
+ 
+      
+      
+    </div>
+ 
+    
+    <div>
+      
+      <button (click)="openadd()" class="btn btn-success" style="margin-top: 5px; display: inline;"><i
+        class="icons fas fa-user-plus"></i>&nbsp;ADD CLIENT</button>
+  <div class="information">
+   <ion-list>
+      <div *ngFor="let data of sortClients | filter : filter | paginate : {
+        itemsPerPage: tableSize,
+        currentPage: page,
+        totalItems: count
+      };" >
+        <ion-card class="clients" style="font-size: medium;">  
+          <div style="text-align: left !important;">
+            
+            <button (click)="gotopet(data.client_id)" class="btn clientname" ><i class="icons fas fa-user-check"></i>&nbsp;{{data.name}}</button>
+            <a class="edit-del" (click)="markdeleteclient(data)"
+            style="cursor: pointer;float: right;margin: 5px;"><i title="Delete Client"
+              style="color:rgb(240, 53, 91);" class="fas fa-user-minus fa-2x"></i></a>
+
+          <a class="edit-del" (click)="opendit(data)" style="cursor: pointer; float: right;margin: 5px;"><i
+              title="Edit Client" style="color: cadetblue;" class="fas fa-user-edit fa-2x"></i></a>
+                     
+          </div>
+          
+          <div style="vertical-align: middle; margin: 10px;">
+            <label style="display: block;"><i style="color: green;"
+              class="fas fa-map-marker-alt"></i>&nbsp;{{data.address}}</label>
+          <label style="display: block;"><i style="color: darkred;"
+              class="fas fa-at"></i>&nbsp;{{data.email}}</label>
+          <label style="display: block;"><i style="color: darkcyan;"
+              class="fas fa-mobile-alt"></i>&nbsp;{{data.mobile_number}}</label>
+          <label style="display: block;"><i style="color: darkmagenta;"
+              class="fas fa-calendar-plus"></i>&nbsp;{{data.date_added | date}}</label>
+          </div>
+        </ion-card>
+
+        
+
+
+      
+      </div>
+
+</ion-list>
+<div class="d-flex justify-content-center">
+  <pagination-controls 
+    responsive="true" 
+    previousLabel="Prev" 
+    nextLabel="Next" 
+    (pageChange)="onTableDataChange($event)"
+    maxSize="7">
+  </pagination-controls>
+</div>
+</div>    
+</div>
+  
+  
+  
+  </div>
+ 
+  
+    <div class="calendar p768">
+<div style="text-align: center;"> <button style="border-radius: 3px;" (click)="schedule()" class="btn btn-success"  ><i class="icons fas fa-calendar-plus"></i>&nbsp;ADD SCHEDULE</button></div>
+      <button class="btn text-light" fill="clear" (click)="back()">
+        <i class="fas fa-angle-left"></i>
+      </button>
+      <button class="btn text-light" style="float: right;" fill="clear" (click)="next()">
+        <i class="fas fa-angle-right"></i>
+      </button>
+      <h2 style="text-align: center;">{{ viewTitle }}</h2>
+     
+     
+      
+      <calendar 
+      [eventSource]="eventSource"
+      [calendarMode]="calendar.mode"
+      [currentDate]="calendar.currentDate"
+      (onEventSelected)="onEventSelected($event)"
+      (onTitleChanged)="onViewTitleChanged($event)"
+      (onTimeSelected)="onTimeSelected($event)"
+      
+    >
+    </calendar></div>
+
+ 
+
+</ion-row>
+
+  
+
+       
+  <div class="w3-center">
+    <div class="w3-container1" style="overflow-x:auto;">
+      
+    
+     
+    </div>  
+  </div>   
+  
+  
+
+ 
+</ion-grid>
+  
+  
+
+  </div>
+ 
+  
+  </ion-card>
+ 
+  
+</ion-content>

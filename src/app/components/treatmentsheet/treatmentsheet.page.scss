@@ -1,0 +1,92 @@
+
+.treatment-switch {
+   border: solid rgb(222, 221, 221);
+   border-radius: 3px;
+   border-width: 1px;
+   margin: 0 auto;
+   display: flex;
+   justify-content: space-between;
+
+   margin: 0px 10px;
+   color: black;
+   font-weight: bold;
+   font-family: Lato, sans-serif;
+   margin-left: 20px;
+   margin-right: 20px;
+   margin-top:  20px;
+}
+
+.sss {
+    border-right: solid rgb(226, 225, 225); 
+    border-width: 1px; 
+}
+
+.bb {
+    border-bottom: solid rgb(226, 225, 225); 
+    border-width: 1px; 
+    margin-top: 10px;
+}
+.bt {
+    border-top: solid rgb(226, 225, 225); 
+    border-width: 1px; 
+
+}
+
+#mtop {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.ion-float-right {
+    float: right;
+    font-size: 25px;
+    background: none;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.btn-success{
+    background-color: teal;
+}
+
+.btn-light{
+    background-color: rgb(211, 228, 228);
+}
+
+.scroll {
+    overflow-y: scroll;
+}
+
+.results {
+    color: crimson;
+}
+
+.btn {
+    transition: all 0.3s linear;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+a i {
+    transition: all 0.3s linear;
+}
+
+a:hover i {
+    transform: scale(1.05);
+}
+
+.modal-header {
+    background-color: teal;
+    padding: 5px;
+    color: white;
+ }
+
+ .modal-footer {
+
+    background-color: crimson;
+    padding: 10px;
+    color: white;
+
+} 

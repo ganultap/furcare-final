@@ -1,0 +1,16 @@
+#content {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}.treatment-switch {
+     border: solid black;
+    border-radius: 10px;
+    border-width: 1px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+   
+    margin: 0px 10px;
+    color: black;
+    font-weight: bold;
+    font-family: Lato, sans-serif;
+}

@@ -1,0 +1,65 @@
+
+ 
+  <body>
+      
+    <div class="modal-header">						
+      <h4 class="modal-title">Choose photo</h4>
+      <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+    </div>
+    <div class="modal-body">					
+      <div class="form-group">
+        <div>
+          <input [(ngModel)]="photo" type="radio" id="huey" name="image" value="bordetella"
+                 checked>
+          <label for="huey">Bodetella</label>
+          <img class="image" src="assets/photos/bordetella.jpg" alt="Italian Trulli">
+        </div>
+        
+        <div>
+          <input [(ngModel)]="photo" type="radio" id="dewey" name="image" value="canine distemper">
+          <label for="dewey">Canine distemper</label>
+          <img class="image" src="assets/photos/canine distemper.jpg" alt="Italian Trulli">
+        </div>
+        
+        <div>
+          <input [(ngModel)]="photo" type="radio" id="louie" name="image" value="canine distemper2">
+          <label for="louie">Canine distemper2</label>
+          <img class="image" src="assets/photos/canine distemper2.jpg" alt="Italian Trulli">
+        </div>
+        <div>
+          <input [(ngModel)]="photo" type="radio" id="louie" name="image" value="endozole">
+          <label for="louie">Endozole</label>
+          <img class="image" src="assets/photos/endozole.jpg" alt="Italian Trulli">
+        </div>
+        <div>
+          <input [(ngModel)]="photo" type="radio" id="louie" name="image" value="prazilex">
+          <label for="louie">Prazilex</label>
+          <img class="image" src="assets/photos/prazilex.jpg" alt="Italian Trulli">
+        </div>
+        <div>
+          <input [(ngModel)]="photo" type="radio" id="louie" name="image" value="pyranex">
+          <label for="louie">Pyranex</label>
+          <img class="image" src="assets/photos/pyranex.jpg" alt="Italian Trulli">
+        </div>
+        <div>
+          <input [(ngModel)]="photo" type="radio" id="louie" name="image" value="rabisin">
+          <label for="louie">Rabisin</label>
+          <img class="image" src="assets/photos/rabisin.jpg" alt="Italian Trulli">
+        </div>
+      </div>
+    
+    
+      
+  	
+          
+    </div>
+    
+
+    <div class="modal-footer">
+      <input type="button" class="btn btn-default" (click)="dismissModal()"  value="Cancel">
+      <input type="submit" class="btn btn-success" (click)="choose()" value="Choose">
+    </div>
+  
+  </body>  
+
+  

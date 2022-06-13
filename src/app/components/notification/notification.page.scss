@@ -1,0 +1,31 @@
+.notification{
+    padding: 4px;
+    // border-bottom:solid rgb(198, 198, 198);
+    border-width: 1px;
+    box-shadow: 0px 2px 2px 0px rgba(212, 211, 211, 0.4);
+
+}
+.ion-content::-webkit-scrollbar {
+    display: none;
+  }
+
+.lista {
+    transition: all 0.3s linear;
+}
+
+.text {
+    margin-left: 5px;
+}
+  
+.lista:hover{
+
+    border-radius: 3px;
+    background-color: rgb(238, 236, 236);
+    transform: scale(1.03);
+}
+
+.modal-header {
+    background-color: teal;
+    padding: 5px;
+    color: white;
+ }

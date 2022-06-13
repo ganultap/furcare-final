@@ -1,0 +1,354 @@
+
+ 
+        <div class="modal-header">						
+          <label class="modal-title"> &nbsp; <i class="fas fa-notes-medical fa-2x" style="color: gold;"></i> &nbsp; Medical History</label>
+          <button type="button" class="close" (click)="dismissModal()" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body scroll">					
+         <div class="row" style="border-bottom: solid black; border-width: 1px; margin-bottom: 10px;">
+           <div class="col">
+            <label style="display: block; margin-bottom: 20px"><b>Name of Owner: </b>{{client.name}} </label>
+            <label style="display: block; margin-bottom: 20px"><b>Pet's Name: </b>{{patient.name}} </label>
+            <label style="display: block; margin-bottom: 20px"><b>Cellphone No.: </b>{{client.mobile_number}} </label> 
+            <label style="display: block; margin-bottom: 20px"><b>Address: </b>{{client.address}} </label>
+          
+          </div>
+          <div class="col">
+            <label style="display: block; margin-bottom: 20px"><b>Date: </b>{{date}} </label>
+            <label style="display: block; margin-bottom: 20px"><b>Breed: </b>{{patient.breed}}</label>
+            <label style="display: block; margin-bottom: 20px"><b>DOB: </b>{{patient.birth}} </label> 
+          </div>
+        
+          </div>
+      <div class="row" style="margin: auto;">
+
+          <label style="display: block; margin-bottom: 20px"><b>Medical History: </b> </label>
+        
+        </div>
+
+        <div class="confine-switch">
+          <ion-segment [(ngModel)]="status">
+              <ion-segment-button class="sss" value="Service">
+                  <ion-label>Services <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info">{{sortservice.length}}</span></sup></ion-label>
+              </ion-segment-button>
+              <ion-segment-button class="sss" value="Treatment Sheet">
+                  <ion-label>Treatments <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info">{{sorttreatment.length}}</span></sup></ion-label>
+              </ion-segment-button>
+              <ion-segment-button class="" value="Confinement">
+                <ion-label>Confinement <sup><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info">{{sortconfinement.length}}</span></sup></ion-label>
+            </ion-segment-button>
+          </ion-segment>
+      </div>
+
+      <div [hidden]="status != 'Service'">
+        <div class="row" style="margin: auto; overflow: auto; scroll-behavior: auto; font-size: 17px;">
+          <ion-searchbar class="searchbar" style=" display: inline; float: left;" [(ngModel)]="filter"></ion-searchbar>
+          <div class="table-wrapper" >
+            <div class="table-responsive">
+             
+               
+                <table class="table" id="myTable">
+                  <thead>
+                    <tr  style="text-align: center;">
+                      <th >DATE</th>
+                      <th >SERVICE</th>
+                      
+                      <th >WEIGHT (in kg.)</th>
+                      <th style="width: 300px;"></th>
+                      <th>AGAINST</th>
+                     
+                  
+                      <th >VETERINARIAN</th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of sortservice  | filter : filter | paginate : {
+                      itemsPerPage: tableSize1,
+                      currentPage: page1,
+                      totalItems: count1,
+                      id: 'service'
+                    };" [ngClass]="{'my_class': data.done == 1}">
+                      <td><b *ngIf="mobile" style="float: left;">DATE: </b>{{data.service_date | date}}</td>
+                      <td><b *ngIf="mobile" style="float: left;">SERVICE: </b>{{data.service_type}}</td>
+                     
+                      <td><b *ngIf="mobile" style="float: left;">WEIGHT: </b>{{data.weight}}</td>
+                      <td ><button (click)="viewphoto(data.photolink)" style="background: none;"><img *ngIf="data.photo != ''" style="width: 150px; height: 80px;" [src]='data.photolink' alt="Italian Trulli"></button></td>
+                      <td><b *ngIf="mobile" style="float: left;">AGAINST: </b>{{data.against}}</td>
+                      
+                
+                      <td><b *ngIf="mobile" style="float: left;">VETERINARIAN: </b>{{data.veterinarian}}</td>
+                      
+                      
+                    </tr>
+                  
+                   
+                    
+                    
+                  </tbody>
+                </table>
+                <div class="d-flex justify-content-center">
+                  <pagination-controls 
+                    responsive="true" 
+                    previousLabel="Prev" 
+                    nextLabel="Next" 
+                    (pageChange)="onTableDataChange1($event)"
+                    id="service"
+                    maxSize="7">
+                  </pagination-controls>
+                </div>
+              </div>
+            </div>
+            </div>
+        
+      </div>
+      
+      <div [hidden]="status != 'Treatment Sheet'" style="margin-left: auto;margin-right: auto;" class="treatment">
+        <ion-searchbar class="searchbar" style=" display: inline; float: left;" [(ngModel)]="filter1"></ion-searchbar>
+
+        
+        <div *ngFor="let data of sorttreatment | filter: filter1 | paginate : {
+          itemsPerPage: 1,
+          currentPage: page,
+          totalItems: count,
+          id: 'treatment'
+        };"
+        style="margin: 5px; border-radius: 5px;">
+         
+        
+          <ion-card class="modal-body">			
+             <div class="bb">
+              <label><b>Date: {{data.date | date: 'medium'}}</b></label>
+             </div>
+  
+            <label style="display: block;"><b>Veterinarian: </b>{{data.veterinarian}}</label>		
+            <div class="form-group">
+             
+              
+    
+    
+    
+    
+              <div><label><b>Diagnosis/Findings: </b></label></div>
+              <div><u class="results">{{data.diagnosis}}</u></div>
+         
+              
+              
+           <div class="row bb">  
+             <div class="col"><b>Patient Name: </b><u class="results">{{data.name}}</u></div>
+             <div class="col"> <label><b>Breed: </b><u class="results">{{data.breed}}</u></label></div>
+              
+              
+            </div> 
+           
+            </div>
+            <div class="form-group">
+    
+            
+          <div class="row">
+            <div class="col">
+              <b>BW: </b><u class="results">{{data.bw}}</u>
+             
+     
+            </div> 
+            <div class="col">
+              <b>HR: </b><u class="results">{{data.hr}}</u>
+      
+            </div> 
+              <div class="col">
+              <b>MM: </b><u class="results">{{data.mm}}</u>
+            
+         
+            </div> 
+            </div>
+            <div class="row">
+              <div class="col">
+                <b>PR: </b><u class="results">{{data.pr}}</u>
+               
+            
+              </div> 
+              <div class="col">
+                <b>Temp: </b><u class="results">{{data.temp}}</u>
+            
+              </div> 
+                <div class="col">
+                <b>RR: </b><u class="results">{{data.rr}}</u>
+              
+             
+              </div> 
+              </div>
+              <div class="row bb">
+                <div class="col">
+                  <b>CRT: </b><u class="results">{{data.crt}}</u>
+                 
+              
+                </div> 
+                <div class="col">
+                  <b>BCS: </b><u class="results">{{data.bcs}}</u>
+             
+                </div> 
+                <div class="col">
+                  
+             
+                </div> 
+                </div>
+    
+    
+    
+            </div>
+    
+            <div class="row bb">
+              <div class="col">
+                          <ion-label><b>AM: </b><u class="results">{{data.am}}</u></ion-label>
+                          
+                          
+                        </div>
+            
+              <div class="col">
+                          <ion-label><b>PM : </b><u class="results">{{data.pm}}</u></ion-label>
+                         
+                        
+            
+                        
+                      </div>
+    
+    
+           
+          
+                
+                
+               
+          </div>
+          <div class="row" style="margin-left: 1px">
+            <div class="form-group" style="margin-top: 10px;">
+              
+              <div>
+                <label><b>Fluid/Rate : </b></label> <br> 
+              </div>
+              <div>
+                <u class="results">{{data.fluid}}</u>
+              </div>
+           
+            </div>
+  
+          </div>
+          <div class="row" style="margin-left: 1px">
+            <div class="form-group" style="margin-top: 10px;">
+              
+              <div>
+                <label><b>Medication : </b></label> <br> 
+              </div>
+              <div>
+                <u class="results">{{data.medication}}</u>
+              </div>
+           
+            </div>
+  
+          </div>
+          <div class="row" style="margin-left: 1px">
+            <div class="form-group" style="margin-top: 10px;">
+              
+              <div>
+                <label><b>Comments : </b></label> <br> 
+              </div>
+              <div>
+                <u class="results">{{data.comments}}</u>
+              </div>
+           
+            </div>
+  
+          </div>
+         
+  
+  
+  
+  
+  
+  
+          </ion-card>
+  
+        
+    </div>
+    <div class="d-flex justify-content-center">
+      <pagination-controls 
+        responsive="true" 
+        previousLabel="Prev" 
+        nextLabel="Next" 
+        (pageChange)="onTableDataChange($event)"
+        id="treatment"
+        maxSize="7">
+      </pagination-controls>
+    </div>
+
+      </div>
+      <div [hidden]="status != 'Confinement'">
+
+
+        <div class="row" style="margin: auto; overflow: auto; scroll-behavior: auto; font-size: 17px;">
+          <ion-searchbar class="searchbar" style=" display: inline; float: left;" [(ngModel)]="filter2"></ion-searchbar>
+          <div class="table-wrapper" >
+            <div class="table-responsive">
+             
+               
+                <table class="table" id="myTable">
+                  <thead>
+                    <tr  style="text-align: center;">
+                      <th>Date of admission</th>
+                      <th>Veterinarian</th>
+                      
+                      <th>Signature</th>
+                      
+                  
+                      <th style="width: auto;">date of release</th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of sortconfinement  | filter : filter2 | paginate : {
+                      itemsPerPage: tableSize2,
+                      currentPage: page2,
+                      totalItems: count2,
+                      id: 'confinement'
+                    };" [ngClass]="{'my_class': data.released == 1}">
+                      <td><b *ngIf="mobile" style="float: left;">admission: </b>{{data.date_of_addmision | date : 'medium'}}</td>
+                      <td><b *ngIf="mobile" style="float: left;">Veterinarian: </b>{{data.veterinarian}}</td>
+                      <td ><button (click)="viewphoto(data.photolink)" style="background: none;"><img *ngIf="data.photo != ''" style="width: 150px; height: 80px;" [src]='data.photolink' alt="no image"></button></td>
+                     
+                      <td><b *ngIf="mobile" style="float: left;">release: </b>{{data.date_of_release | date : 'medium'}}</td>
+                      
+                
+                     
+                      
+                      
+                    </tr>
+                  
+                   
+                    
+                    
+                  </tbody>
+                </table>
+                <div class="d-flex justify-content-center">
+                  <pagination-controls 
+                    responsive="true" 
+                    previousLabel="Prev" 
+                    nextLabel="Next" 
+                    (pageChange)="onTableDataChange2($event)"
+                    id="confinement"
+                    maxSize="7">
+                  </pagination-controls>
+                </div>
+              </div>
+            </div>
+            </div>
+
+
+      </div>
+
+
+
+        </div>
+        
+        
+      <div class="modal-footer">
+        <i class="fas fa-paw fa-2x"></i>
+      </div>
